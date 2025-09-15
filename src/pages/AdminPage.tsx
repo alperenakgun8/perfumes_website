@@ -1,11 +1,11 @@
-import Button from '../shared/components/Button/Button';
-import TextInput from '../shared/components/TextInput/TextInput';
+import ConcentrationList from '../features/concentrations/components/ConcentrationList/ConcentrationList';
+import AddConcentration from '../features/concentrations/components/AddConcentration/AddConcentration';
 
 function AdminPage() {
   return (
     <div>
-        <Button name='Press me' ></Button>
-        <TextInput></TextInput>
+        <ConcentrationList></ConcentrationList>
+        <AddConcentration></AddConcentration>
     </div>
   )
 }
