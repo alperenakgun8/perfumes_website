@@ -1,0 +1,51 @@
+:root {
+  /* 🎨 Renkler */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-primary-active: #3730a3;
+
+  --color-secondary: #10b981;
+  --color-secondary-hover: #059669;
+
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #374151;
+  --color-placeholder: #9ca3af;
+
+  --color-border: #d1d5db;
+  --color-border-hover: #9ca3af;
+  --color-bg: #ffffff;
+
+  /* 🌟 Gölge efektleri */
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 5px 12px rgba(0, 0, 0, 0.25);
+
+  /* 📝 Fontlar */
+  --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  /* 📏 Border radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+
+  /* ⏱️ Geçiş efektleri */
+  --transition: all 0.25s ease-in-out;
+
+  /* 📐 Modüler ölçüler */
+  --spacing-xs: 4px;
+  --spacing-sm: 6px;
+  --spacing-md: 10px;
+  --spacing-lg: 14px;
+  --spacing-xl: 18px;
+  --spacing-xxl: 24px;
+
+  /* 🔠 Font boyutları */
+  --font-xs: 12px;
+  --font-sm: 13px;
+  --font-md: 14px;
+  --font-lg: 15px;
+  --font-xl: 16px;
+  --font-xxl: 17px;
+}
