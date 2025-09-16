@@ -12,7 +12,7 @@ const ConcentrationList: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchConcentrations());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className='concentrations-list'>

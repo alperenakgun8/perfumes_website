@@ -10,6 +10,5 @@
   padding: var(--spacing-xxl);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
-  max-width: 600px;
   margin: var(--spacing-xxl) auto;
 }

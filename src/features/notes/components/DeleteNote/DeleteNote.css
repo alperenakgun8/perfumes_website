@@ -1,8 +1,8 @@
-.update-concentration {
+.delete-note {
      display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: var(--spacing-xxl);
   font-family: var(--font-family);
   background-color: var(--color-bg);

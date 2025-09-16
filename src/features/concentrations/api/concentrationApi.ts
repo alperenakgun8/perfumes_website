@@ -3,7 +3,6 @@ import type { Concentration } from "../slices/concentrationSlice";
 
 export const getConcentrations = async (): Promise<Concentration[]> => {
     const response = await axiosInstance.get("/concentrations/");
-    console.log(response);
     return response.data.data;
 };
 

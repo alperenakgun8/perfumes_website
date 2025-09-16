@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import concentrationReducer from '../features/concentrations/slices/concentrationSlice';
+import noteReducer from '../features/notes/slices/noteSlice'
 
 export const store = configureStore({
   reducer: {
     concentration: concentrationReducer,
+    note: noteReducer,
   },
 })
 

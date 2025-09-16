@@ -1,0 +1,33 @@
+.container-notes-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text-primary);
+  padding: var(--spacing-xxl);
+   margin: var(--spacing-xxl) auto;
+   font-family: var(--font-family);
+  max-width: 600px;
+}
+
+.notes-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+  font-size: var(--font-xl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-primary);
+}
+
+.notes-list p {
+  font-size: var(--font-md);
+  color: var(--color-text-secondary);
+}

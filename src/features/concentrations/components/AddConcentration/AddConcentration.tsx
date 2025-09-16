@@ -32,7 +32,7 @@ function AddConcentration() {
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
         />
-
+        
         <TextInput 
           variant='primary'
           placeholder='Display Name'
