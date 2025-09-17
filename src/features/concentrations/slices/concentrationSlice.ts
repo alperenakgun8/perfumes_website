@@ -1,12 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchConcentrations, addNewConcentration, updateExistingConcentration, deleteExistingConcentration } from "../thunks/concentrationThunks";
-
-export interface Concentration {
-    _id?: string,
-    name: string;
-    display_name: string;
-}
+import type { Concentration } from "../api/types";
 
 export interface ConcentrationState {
     concentrations: Concentration[];

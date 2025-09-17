@@ -1,5 +1,5 @@
 import axiosInstance from "../../../config/axiosInstance";
-import type { Note } from "../slices/noteSlice";
+import type { Note } from "./types";
 
 export const getNotes = async (): Promise<Note[]> => {
     const response = await axiosInstance.get("/notes/");

@@ -3,7 +3,7 @@ import Button from '../../../../shared/components/Button/Button'
 import { addNewConcentration } from '../../thunks/concentrationThunks';
 import './AddConcentration.css'
 import { useState } from 'react'
-import type { Concentration } from '../../slices/concentrationSlice';
+import type { Concentration } from '../../api/types';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../../../../app/store';
 

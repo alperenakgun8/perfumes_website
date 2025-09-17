@@ -4,7 +4,7 @@ import Button from '../../../../shared/components/Button/Button';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import type { AppDispatch } from '../../../../app/store';
-import type { Note } from '../../slices/noteSlice';
+import type { Note } from '../../api/types';
 import { addNewNote } from '../../thunks/noteThunks';
 
 function AddNote() {

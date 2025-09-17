@@ -16,6 +16,11 @@ export const addPerfume = async (data: PerfumeAdd): Promise<Perfume> => {
     return response.data.data.data;
 }
 
+export const updatePerfume = async (data: PerfumeAdd & { _id:string }): Promise<Perfume> => {
+    const response = await axiosInstance.post("/perfumes/update", data);
+    return response.data.data.data;
+}
+
 export const deletePerfume = async (id: string): Promise<string> => {
     await axiosInstance.delete(`/perfumes/${id}`);
     return id;

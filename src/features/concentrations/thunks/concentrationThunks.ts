@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import type { Concentration } from "../slices/concentrationSlice";
+import type { Concentration } from "../api/types";
 import { getConcentrations, addConcentration, updateConcentration, deleteConcentration } from "../api/concentrationApi";
 
 export const fetchConcentrations = createAsyncThunk(

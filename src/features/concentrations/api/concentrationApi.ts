@@ -1,5 +1,5 @@
 import axiosInstance from "../../../config/axiosInstance";
-import type { Concentration } from "../slices/concentrationSlice";
+import type { Concentration } from "./types";
 
 export const getConcentrations = async (): Promise<Concentration[]> => {
     const response = await axiosInstance.get("/concentrations/");

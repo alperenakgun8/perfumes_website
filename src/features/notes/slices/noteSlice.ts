@@ -1,12 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchNotes, addNewNote, updateExistingNote, deleteExistingNote } from "../thunks/noteThunks";
-
-export interface Note {
-    _id?: string,
-    name: string,
-    image_url: string
-}
+import type { Note } from '../api/types'
 
 export interface NoteState {
     notes: Note[];
