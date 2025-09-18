@@ -1,11 +1,13 @@
 import './App.css'
-import AdminPage from '../pages/AdminPage'
+import Router from './router'
+import Header from '../shared/components/Header/Header'
 
 function App() {
 
   return (
     <>
-      <AdminPage></AdminPage>
+      <Header></Header>
+      <Router></Router>
     </>
   )
 }

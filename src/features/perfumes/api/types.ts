@@ -19,13 +19,13 @@ export interface PerfumeDetail extends Perfume {
     notes: PerfumeNote[];
 }
 
-interface AddPerfume {
-    note_id: string,
-    note_type: string
+export interface PerfumeAdd extends Perfume {
+    notes: SelectedNote[];
 }
 
-export interface PerfumeAdd extends Perfume {
-    notes: AddPerfume[];
+export interface SelectedNote {
+    note_id: string;
+    note_type: "TOP" | "MIDDLE" | "BASE";
 }
 
 
