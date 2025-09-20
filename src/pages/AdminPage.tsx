@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { Box, List, ListItemButton, ListItemText, Drawer, Toolbar, Divider } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Box, List, ListItemButton, ListItemText, Drawer, Toolbar, Divider, Typography } from "@mui/material";
 import { Link, useLocation, Outlet } from "react-router-dom";
 
 const drawerWidth = 240;
-const collapsedWidth = 5;
 
 function AdminPage() {
   const [open, setOpen] = useState(false);
@@ -13,28 +12,47 @@ function AdminPage() {
     { text: "Concentrations", path: "/admin/concentration" },
     { text: "Notes", path: "/admin/note" },
     { text: "Perfumes", path: "/admin/perfume" },
+    { text: "Users", path: "/admin/user"}
   ];
+
+  // Mouse konumunu takip et
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Eğer mouse sol kenardan 60px içinde ise sidebar aç
+      if (e.clientX <= 30) {
+        setOpen(true);
+      } else {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
       {/* Sidebar */}
       <Drawer
-        variant="permanent"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
+        variant="temporary" // geçici drawer, boşluk bırakmaz
+        open={open}
+        onClose={() => setOpen(false)}
+        ModalProps={{ keepMounted: true }}
         sx={{
-          width: open ? drawerWidth : collapsedWidth,
+          width: drawerWidth,
           flexShrink: 0,
-          whiteSpace: "nowrap",
-          transition: "width 0.3s",
-          [`& .MuiDrawer-paper`]: {
-            width: open ? drawerWidth : collapsedWidth,
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
             boxSizing: "border-box",
-            transition: "width 0.3s",
+            overflowX: "hidden",
           },
         }}
       >
-        <Toolbar />
+        <Toolbar>
+          <Typography variant="h5" fontWeight={700}>
+            Admin Panel
+          </Typography>
+        </Toolbar>
         <Divider />
         <List>
           {menuItems.map((item) => (
@@ -43,12 +61,9 @@ function AdminPage() {
               component={Link}
               to={item.path}
               selected={location.pathname === item.path}
-              sx={{ justifyContent: open ? "initial" : "center", px: 2.5 }}
+              sx={{ justifyContent: "initial", px: 2.5 }}
             >
-              <ListItemText
-                primary={item.text}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
+              <ListItemText primary={item.text} />
             </ListItemButton>
           ))}
         </List>
@@ -57,7 +72,7 @@ function AdminPage() {
       {/* Main content */}
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Outlet /> {/* Nested route’lar buraya render olacak */}
+        <Outlet />
       </Box>
     </Box>
   );

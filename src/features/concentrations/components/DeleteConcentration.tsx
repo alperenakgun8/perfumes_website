@@ -1,8 +1,3 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../../app/store";
-import { deleteExistingConcentration } from "../thunks/concentrationThunks";
-
 import {
   Card,
   CardContent,
@@ -16,28 +11,11 @@ import {
   Button,
   OutlinedInput,
 } from "@mui/material";
+import { useConcentrationForm } from "../hooks/useConcentrationForm";
 
 function DeleteConcentration() {
-  const dispatch = useDispatch<AppDispatch>();
-  const [selectedId, setSelectedId] = useState<string>("");
 
-  const concentrations = useSelector(
-    (state: RootState) => state.concentration.concentrations
-  );
-
-  const dropDownOptions = concentrations
-    .filter((c): c is (typeof c) & { _id: string } => !!c._id)
-    .map((c) => ({
-      value: c._id,
-      label: `${c.name} - ${c.display_name}`,
-    }));
-
-  const handleDeleteConcentration = () => {
-    if (selectedId) {
-      dispatch(deleteExistingConcentration(selectedId));
-      setSelectedId("");
-    }
-  };
+  const { id, setId, concentrationDropdownOptions, handleDelete} = useConcentrationForm();
 
   return (
     <Card sx={{ maxWidth: 500, margin: "2rem auto", padding: 2, boxShadow: 3 }}>
@@ -51,11 +29,11 @@ function DeleteConcentration() {
               <InputLabel id="concentration-select-label">Concentration</InputLabel>
               <Select
                 labelId="concentration-select-label"
-                value={selectedId}
-                onChange={(e) => setSelectedId(e.target.value)}
+                value={id}
+                onChange={(e) => setId(e.target.value)}
                 input={<OutlinedInput label="Concentration" />}
               >
-                {dropDownOptions.map((option) => (
+                {concentrationDropdownOptions.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
@@ -69,7 +47,7 @@ function DeleteConcentration() {
         <Button
           variant="contained"
           color="error"
-          onClick={handleDeleteConcentration}
+          onClick={handleDelete}
         >
           Delete
         </Button>

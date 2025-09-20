@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from '../../../app/store';
-import { fetchConcentrations } from '../thunks/concentrationThunks';
-
+import React from 'react';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../../app/store';
 import {
   Card,
   CardContent,
@@ -12,17 +10,11 @@ import {
   ListItemText,
   Divider,
 } from '@mui/material';
+import { useConcentrationForm } from '../hooks/useConcentrationForm';
 
 const ConcentrationList: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
 
-  const concentrations = useSelector(
-    (state: RootState) => state.concentration.concentrations
-  );
-
-  useEffect(() => {
-    dispatch(fetchConcentrations());
-  }, [dispatch]);
+  const { concentrations } = useConcentrationForm();
 
   return (
     <Card sx={{ maxWidth: 600, margin: '2rem auto', boxShadow: 3 }}>

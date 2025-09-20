@@ -1,21 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch } from "../../../app/store";
-import type { RootState } from "../../../app/store";
-import { useEffect } from "react";
-import { fetchPerfumes } from "../thunks/perfumeThunks";
+import { usePerfumeForm } from "../hooks/usePerfumeForm";
 import PerfumeCard from "./PerfumeCard";
 import { Card, CardContent, Typography, Grid} from '@mui/material';
-
 function PerfumeList() {
 
-    const dispatch = useDispatch<AppDispatch>();
-
-    const perfumes = useSelector((state: RootState) => state.perfume.perfumes);
+    const { perfumes } = usePerfumeForm();
     
-    useEffect(() => {
-        dispatch(fetchPerfumes());
-    }, [dispatch]);
-
   return (
     <Card sx={{ maxWidth: 600, margin: '2rem auto', padding: 2, boxShadow: 3 }}>
         <CardContent>

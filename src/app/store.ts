@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import concentrationReducer from '../features/concentrations/slices/concentrationSlice';
 import noteReducer from '../features/notes/slices/noteSlice';
 import perfumeReducer from '../features/perfumes/slices/perfumeSlice';
+import  userReducer  from '../features/users/slices/userSlice';
 
 export const store = configureStore({
   reducer: {
     concentration: concentrationReducer,
     note: noteReducer,
     perfume: perfumeReducer,
+    user: userReducer,
   },
 })
 

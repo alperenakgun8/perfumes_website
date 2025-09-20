@@ -1,9 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from '../../../app/store';
-import { useState } from 'react';
-import type { PerfumeAdd, SelectedNote } from '../api/types';
-import { addNewPerfume } from '../thunks/perfumeThunks';
-
+import { usePerfumeForm } from '../hooks/usePerfumeForm';
 import {
   TextField,
   Select,
@@ -23,68 +18,8 @@ import {
 } from '@mui/material';
 
 function AddPerfume() {
-  const dispatch = useDispatch<AppDispatch>();
 
-  const [name, setName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [concentrationId, setConcentrationId] = useState<string>("");
-  const [brand, setBrand] = useState<string>("");
-  const [gender, setGender] = useState<string>("");
-  const [notes, setNotes] = useState<SelectedNote[]>([]);
-
-  const concentrations = useSelector((state: RootState) => state.concentration.concentrations);
-  const noteList = useSelector((state: RootState) => state.note.notes);
-  const genders = ["Male", "Female", "Unisex"];
-
-  const concentrationDropDownOptions = concentrations
-    .filter((c): c is (typeof c) & { _id: string } => !!c._id)
-    .map(c => ({ value: c._id, label: c.name }));
-
-  const selectItemsDropDownOptions = noteList
-    .filter((s): s is (typeof s) & { _id: string } => !!s._id)
-    .map(s => ({ value: s._id, label: s.name }));
-
-  // Genel handler, noteType = "TOP" | "MIDDLE" | "BASE"
-  const handleNotesChange = (noteType: "TOP" | "MIDDLE" | "BASE", selectedIds: string[]) => {
-    setNotes(prevNotes => {
-      // Aynı türden önceki seçimleri çıkar
-      const filtered = prevNotes.filter(n => n.note_type !== noteType);
-      // Yeni seçimleri ekle
-      const updated = selectedIds.map(id => ({ note_id: id, note_type: noteType } as const));
-      return [...filtered, ...updated];
-    });
-  };
-
-  // Seçilebilecek seçenekleri filtrele
-  const getAvailableNotes = (noteType: "TOP" | "MIDDLE" | "BASE") => {
-    const selectedIdsOtherTypes = notes
-      .filter(n => n.note_type !== noteType)
-      .map(n => n.note_id);
-    return selectItemsDropDownOptions.filter(opt => !selectedIdsOtherTypes.includes(opt.value));
-  };
-
-  const handleAddPerfume = () => {
-    const newPerfume: PerfumeAdd = {
-      name,
-      description,
-      concentration_id: concentrationId,
-      brand,
-      gender,
-      image_url: imageUrl,
-      notes
-    };
-    dispatch(addNewPerfume(newPerfume));
-
-    // Reset form
-    setName("");
-    setDescription("");
-    setConcentrationId("");
-    setBrand("");
-    setGender("");
-    setImageUrl("");
-    setNotes([]);
-  };
+  const { name, setName, description, setDescription, imageUrl, setImageUrl, concentrationId, setConcentrationId, brand, setBrand, gender, setGender, notes, genders, concentrationDropDownOptions,handleNotesChange, getAvailableNotes, handleAdd } = usePerfumeForm();
 
   return (
     <Card sx={{ maxWidth: 800, margin: "2rem auto", padding: 2, boxShadow: 3 }}>
@@ -227,7 +162,7 @@ function AddPerfume() {
       </CardContent>
 
       <CardActions sx={{ justifyContent: "flex-end", padding: "1rem" }}>
-        <Button variant="contained" color="success" onClick={handleAddPerfume}>
+        <Button variant="contained" color="success" onClick={handleAdd}>
           Add Perfume
         </Button>
       </CardActions>

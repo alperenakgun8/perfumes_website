@@ -1,19 +1,10 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from '../../../app/store';
-import { fetchNotes } from '../thunks/noteThunks';
 import NoteCard from './NoteCard';
-
 import { Card, CardContent, Typography, Grid } from '@mui/material';
+import { useNoteForm } from '../hooks/useNoteForm';
 
 function NoteList() {
-  const dispatch = useDispatch<AppDispatch>();
 
-  const notes = useSelector((state: RootState) => state.note.notes);
-
-  useEffect(() => {
-    dispatch(fetchNotes());
-  }, [dispatch]);
+  const { notes } = useNoteForm();
 
   return (
     <Card sx={{ maxWidth: 600, margin: '2rem auto', padding: 2, boxShadow: 3 }}>

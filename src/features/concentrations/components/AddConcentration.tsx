@@ -1,9 +1,4 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import type { AppDispatch } from '../../../app/store';
-import type { Concentration } from '../api/types';
-import { addNewConcentration } from '../thunks/concentrationThunks';
-
+import { useConcentrationForm } from '../hooks/useConcentrationForm';
 import {
   TextField,
   Button,
@@ -15,20 +10,8 @@ import {
 } from '@mui/material';
 
 function AddConcentration() {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const [newName, setNewName] = useState<string>("");
-  const [newDisplayName, setNewDisplayName] = useState<string>("");
-
-  const handleAddConcentration = () => {
-    const newConcentration: Concentration = {
-      name: newName,
-      display_name: newDisplayName,
-    };
-    dispatch(addNewConcentration(newConcentration));
-    setNewName("");
-    setNewDisplayName("");
-  };
+  
+  const { name, setName, displayName, setDisplayName, handleAdd } = useConcentrationForm();
 
   return (
     <Card sx={{ maxWidth: 500, margin: "2rem auto", padding: 2, boxShadow: 3 }}>
@@ -41,22 +24,22 @@ function AddConcentration() {
             <TextField
               fullWidth
               label="Name"
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </Grid>
           <Grid size = {{ xs:12 }}>
             <TextField
               fullWidth
               label="Display Name"
-              value={newDisplayName}
-              onChange={(e) => setNewDisplayName(e.target.value)}
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
             />
           </Grid>
         </Grid>
       </CardContent>
       <CardActions sx={{ justifyContent: "flex-end", padding: "1rem" }}>
-        <Button variant="contained" color="success" onClick={handleAddConcentration}>
+        <Button variant="contained" color="success" onClick={handleAdd}>
           Add
         </Button>
       </CardActions>

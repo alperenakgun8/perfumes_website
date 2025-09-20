@@ -12,67 +12,66 @@ import Tooltip from '@mui/material/Tooltip';
 import { Link } from 'react-router-dom';
 
 function Header() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
-  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const pages = [
+    { label: "Search by Notes", path: "/search" },
+    { label: "Perfumes", path: "/perfumes" },
+    { label: "Blog", path: "/blog" },
+  ];
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#4f46e5" }}>
-      <Toolbar sx={{ width: "90vw" ,display: "flex", justifyContent: "space-between" }}>
+    <AppBar position="absolute" sx={{ width: "100%", backgroundColor: "#4f46e5" }}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
         
-        {/* Sol kısım: Logo + Yazı */}
+        {/* Logo */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <img
-            src="/logo.png"
-            alt="Logo"
-            style={{ width: 40, height: 40, marginRight: 8 }}
-          />
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ fontWeight: 700, letterSpacing: ".1rem" }}
-          >
+          <img src="/logo.png" alt="Logo" style={{ width: 40, height: 40, marginRight: 8 }} />
+          <Typography variant="h6" component="div" sx={{ fontWeight: 700, letterSpacing: ".1rem" }}>
             PERFUMES
           </Typography>
         </Box>
 
-        {/* Orta kısım: Sayfalar */}
-        <Box sx={{ display: "flex", gap: 3 }}>
-          <Button sx={{ color: "white" }}>Search by Notes</Button>
-          <Button sx={{ color: "white" }}>Perfumes</Button>
-          <Button sx={{ color: "white" }}>Blog</Button>
+        {/* Orta Menü (Büyük ekran) */}
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 3 }}>
+          {pages.map((page) => (
+            <Button
+              key={page.label}
+              component={Link}
+              to={page.path}
+              sx={{ color: "white", fontWeight: 500 }}
+            >
+              {page.label}
+            </Button>
+          ))}
         </Box>
 
-        {/* Sağ kısım: Kullanıcı Menüsü */}
+        {/* Kullanıcı Menüsü */}
         <Box>
           <Tooltip title="Open menu">
-            <IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar alt="User Avatar" src="/static/images/avatar/1.jpg" />
             </IconButton>
           </Tooltip>
           <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleCloseMenu}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
+            anchorEl={anchorElUser}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
           >
-            <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
-            <MenuItem onClick={handleCloseMenu}>Account</MenuItem>
-            <MenuItem component={Link} to="/admin/concentration" onClick={handleCloseMenu}>Admin Panel</MenuItem>
-            <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
+            <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
+            <MenuItem onClick={handleCloseUserMenu}>Account</MenuItem>
+            <MenuItem component={Link} to="/admin/concentration" onClick={handleCloseUserMenu}>Admin Panel</MenuItem>
+            <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
           </Menu>
         </Box>
       </Toolbar>

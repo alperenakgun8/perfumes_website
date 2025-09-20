@@ -1,83 +1,32 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../../app/store";
-import { updateExistingNote } from "../thunks/noteThunks";
-
 import {
   Card,
   CardContent,
   CardActions,
   Typography,
   Grid,
-  Autocomplete,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  OutlinedInput,
   TextField,
+  Autocomplete,
   Button,
 } from "@mui/material";
+import { useNoteForm } from "../hooks/useNoteForm";
 
 function UpdateNote() {
-  const dispatch = useDispatch<AppDispatch>();
 
-  const [selectedOption, setSelectedOption] = useState<{value: string; label: string} | null >(null);
-  const [updatedName, setUpdatedName] = useState<string>("");
-  const [updatedImageUrl, setUpdatedImageUrl] = useState<string>("");
-
-  const notes = useSelector((state: RootState) => state.note.notes);
-
-  const dropDownOptions = notes
-    .filter((n): n is (typeof n) & { _id: string } => !!n._id)
-    .map((n) => ({
-      value: n._id,
-      label: n.name,
-    }));
-
-  const handleUpdateNote = () => {
-    if (!selectedOption) return;
-
-    const updatedNote = {
-      _id: selectedOption.value,
-      name: updatedName,
-      image_url: updatedImageUrl,
-    };
-    dispatch(updateExistingNote(updatedNote));
-
-    setSelectedOption(null);
-    setUpdatedName("");
-    setUpdatedImageUrl("");
-  };
+  const { name, setName, imageUrl, setImageUrl, selectedOption, setSelectedOption, dropDownOptions, handleUpdate } = useNoteForm();
 
   return (
-    <Card sx={{ maxWidth: 500, margin: "2rem auto", padding: 2, boxShadow: 3 }}>
+    <Card sx={{ margin: "2rem auto", padding: 2, boxShadow: 3 }}>
       <CardContent>
         <Typography variant="h5" gutterBottom>
           Update Note
         </Typography>
         <Grid container spacing={2}>
           <Grid size={{xs:12}}>
-            {/* <FormControl fullWidth>
-              <InputLabel id="note-select-label">Select Note</InputLabel>
-              <Select
-                labelId="note-select-label"
-                value={selectedId}
-                onChange={(e) => setSelectedId(e.target.value)}
-                input={<OutlinedInput label="Select Note" />}
-              >
-                {dropDownOptions.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl> */}
             <Autocomplete
               options={dropDownOptions}
               getOptionLabel={(option) => option.label}
               value={selectedOption}
-              onChange={(event, newValue) => setSelectedOption(newValue)}
+              onChange={(event, newValue) => setSelectedOption(newValue ?? {label: "", value: ""})}
               renderInput={(params) => <TextField {...params} label="Select Note" placeholder="Search..." />}
               disableClearable={false} // true yaparsan seçimi kaldırmayı engeller
             />
@@ -86,22 +35,22 @@ function UpdateNote() {
             <TextField
               fullWidth
               label="Name"
-              value={updatedName}
-              onChange={(e) => setUpdatedName(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </Grid>
           <Grid size={{xs:12}}>
             <TextField
               fullWidth
               label="Image URL"
-              value={updatedImageUrl}
-              onChange={(e) => setUpdatedImageUrl(e.target.value)}
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
             />
           </Grid>
         </Grid>
       </CardContent>
       <CardActions sx={{ justifyContent: "flex-end", padding: "1rem" }}>
-        <Button variant="contained" color="primary" onClick={handleUpdateNote}>
+        <Button variant="contained" color="primary" onClick={handleUpdate}>
           Update
         </Button>
       </CardActions>

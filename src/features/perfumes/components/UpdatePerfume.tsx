@@ -1,9 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from '../../../app/store';
-import { useState } from 'react';
-import type { PerfumeAdd, SelectedNote } from '../api/types';
-import { updateExistingPerfume } from '../thunks/perfumeThunks';
-
+import { usePerfumeForm } from '../hooks/usePerfumeForm';
 import {
   TextField,
   Select,
@@ -23,76 +18,11 @@ import {
 } from '@mui/material';
 
 function UpdatePerfume() {
-  const dispatch = useDispatch<AppDispatch>();
 
-  const [selectedOption, setSelectedOption] = useState<{label: string, value: string}>({label: "", value:""});
-  const [name, setName] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [concentrationId, setConcentrationId] = useState<string>("");
-  const [brand, setBrand] = useState<string>("");
-  const [gender, setGender] = useState<string>("");
-  const [notes, setNotes] = useState<SelectedNote[]>([]);
-
-  const concentrations = useSelector((state: RootState) => state.concentration.concentrations);
-  const perfumes = useSelector((state:RootState) => state.perfume.perfumes);
-  const noteList = useSelector((state: RootState) => state.note.notes);
-  const genders = ["Male", "Female", "Unisex"];
-
-  const perfumeDropDownOptions = perfumes.filter((p): p is (typeof p) & {_id: string} => !!p._id).map(p => ({value: p._id, label: `${p.brand} - ${p.name}`}));
-
-  const concentrationDropDownOptions = concentrations
-    .filter((c): c is (typeof c) & { _id: string } => !!c._id)
-    .map(c => ({ value: c._id, label: c.name }));
-
-  const selectItemsDropDownOptions = noteList
-    .filter((s): s is (typeof s) & { _id: string } => !!s._id)
-    .map(s => ({ value: s._id, label: s.name }));
-
-  // Genel handler, noteType = "TOP" | "MIDDLE" | "BASE"
-  const handleNotesChange = (noteType: "TOP" | "MIDDLE" | "BASE", selectedIds: string[]) => {
-    setNotes(prevNotes => {
-      // Aynı türden önceki seçimleri çıkar
-      const filtered = prevNotes.filter(n => n.note_type !== noteType);
-      // Yeni seçimleri ekle
-      const updated = selectedIds.map(id => ({ note_id: id, note_type: noteType } as const));
-      return [...filtered, ...updated];
-    });
-  };
-
-  // Seçilebilecek seçenekleri filtrele
-  const getAvailableNotes = (noteType: "TOP" | "MIDDLE" | "BASE") => {
-    const selectedIdsOtherTypes = notes
-      .filter(n => n.note_type !== noteType)
-      .map(n => n.note_id);
-    return selectItemsDropDownOptions.filter(opt => !selectedIdsOtherTypes.includes(opt.value));
-  };
-
-  const handleUpdatePerfume = () => {
-    const newPerfume: PerfumeAdd & {_id: string} = {
-      _id: selectedOption.value,
-      name,
-      description,
-      concentration_id: concentrationId,
-      brand,
-      gender,
-      image_url: imageUrl,
-      notes
-    };
-    dispatch(updateExistingPerfume(newPerfume));
-
-    // Reset form
-    setName("");
-    setDescription("");
-    setConcentrationId("");
-    setBrand("");
-    setGender("");
-    setImageUrl("");
-    setNotes([]);
-  };
+  const { selectedOption, setSelectedOption ,name, setName, description, setDescription, imageUrl, setImageUrl, concentrationId, setConcentrationId, brand, setBrand, gender, setGender, notes, genders, concentrationDropDownOptions, perfumeDropDownOptions,handleNotesChange, getAvailableNotes, handleUpdate } = usePerfumeForm();
 
   return (
-    <Card sx={{ maxWidth: 800, margin: "2rem auto", padding: 2, boxShadow: 3 }}>
+    <Card sx={{ margin: "2rem auto", padding: 2, boxShadow: 3 }}>
       <CardContent>
         <Typography variant="h5" gutterBottom>
           Update Perfume
@@ -245,7 +175,7 @@ function UpdatePerfume() {
       </CardContent>
 
       <CardActions sx={{ justifyContent: "flex-end", padding: "1rem" }}>
-        <Button variant="contained" color="primary" onClick={handleUpdatePerfume}>
+        <Button variant="contained" color="primary" onClick={handleUpdate}>
           Update Perfume
         </Button>
       </CardActions>
