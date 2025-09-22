@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
-import type { AppDispatch } from '../app/store';
+import type { AppDispatch } from '../../app/store';
 import { useEffect } from 'react';
-import { fetchConcentrations } from '../features/concentrations/thunks/concentrationThunks';
+import { fetchConcentrations } from '../../features/concentrations/thunks/concentrationThunks';
 
-import ConcentrationList from '../features/concentrations/components/ConcentrationList';
-import AddConcentration from '../features/concentrations/components/AddConcentration';
-import UpdateConcentration from '../features/concentrations/components/UpdateConcentration';
-import DeleteConcentration from '../features/concentrations/components/DeleteConcentration';
+import ConcentrationList from '../../features/concentrations/components/ConcentrationList';
+import AddConcentration from '../../features/concentrations/components/AddConcentration';
+import UpdateConcentration from '../../features/concentrations/components/UpdateConcentration';
+import DeleteConcentration from '../../features/concentrations/components/DeleteConcentration';
 
 import { 
   Card,
@@ -23,7 +23,7 @@ function ConcentrationManagementPage() {
     }, [dispatch]);
 
   return (
-    <Card sx={{ maxWidth: '100%', margin: "2rem auto", padding: 2 }}>
+    <Card sx={{ maxWidth: '100%', margin: "1rem auto", padding: 2 }}>
       <CardContent>
         <Grid container spacing={2}>
           <Grid size={{xs:12}}>

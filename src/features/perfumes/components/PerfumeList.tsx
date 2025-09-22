@@ -6,9 +6,9 @@ function PerfumeList() {
     const { perfumes } = usePerfumeForm();
     
   return (
-    <Card sx={{ maxWidth: 600, margin: '2rem auto', padding: 2, boxShadow: 3 }}>
+    <Card sx={{ margin: '2rem auto', padding: 2, boxShadow: 3 }}>
         <CardContent>
-            <Typography variant="h5" gutterBottom>
+            <Typography justifySelf="center" variant="h5" gutterBottom>
             Perfumes List
         </Typography>
 

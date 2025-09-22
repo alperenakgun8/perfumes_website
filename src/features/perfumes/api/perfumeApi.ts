@@ -1,5 +1,5 @@
 import axiosInstance from "../../../config/axiosInstance";
-import type { Perfume, PerfumeAdd, PerfumeDetail } from "./types";
+import type { Perfume, PerfumeAdd, PerfumeDetail, GeneralPerfumeInfo } from "./types";
 
 export const getPerfumes = async (): Promise<Perfume[]> => {
     const response = await axiosInstance.get("/perfumes");
@@ -8,6 +8,12 @@ export const getPerfumes = async (): Promise<Perfume[]> => {
 
 export const getPerfumeById = async(id: string): Promise<PerfumeDetail> => {
     const response = await axiosInstance.get(`/perfumes/${id}`);
+    return response.data.data;
+}
+
+export const getPerfumeByNotes = async(noteIds: string[]): Promise<GeneralPerfumeInfo[]> => {
+    const response = await axiosInstance.post("/perfumes/bynoteid", { noteIds });
+    console.log(response.data.data);
     return response.data.data;
 }
 

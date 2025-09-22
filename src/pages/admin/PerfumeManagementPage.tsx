@@ -1,15 +1,15 @@
 import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../app/store";
+import type { AppDispatch } from "../../app/store";
 import { useEffect } from "react";
 
-import { fetchPerfumes } from "../features/perfumes/thunks/perfumeThunks";
-import { fetchNotes } from "../features/notes/thunks/noteThunks";
-import { fetchConcentrations } from "../features/concentrations/thunks/concentrationThunks";
+import { fetchPerfumes } from "../../features/perfumes/thunks/perfumeThunks";
+import { fetchNotes } from "../../features/notes/thunks/noteThunks";
+import { fetchConcentrations } from "../../features/concentrations/thunks/concentrationThunks";
 
-import AddPerfume from "../features/perfumes/components/AddPerfume";
-import PerfumeList from "../features/perfumes/components/PerfumeList";
-import DeletePerfume from "../features/perfumes/components/DeletePerfume";
-import UpdatePerfume from "../features/perfumes/components/UpdatePerfume";
+import AddPerfume from "../../features/perfumes/components/AddPerfume";
+import PerfumeList from "../../features/perfumes/components/PerfumeList";
+import DeletePerfume from "../../features/perfumes/components/DeletePerfume";
+import UpdatePerfume from "../../features/perfumes/components/UpdatePerfume";
 
 import { 
   Card,

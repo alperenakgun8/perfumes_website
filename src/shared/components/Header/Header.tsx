@@ -10,13 +10,14 @@ import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import { Link } from 'react-router-dom';
+import logo from '../../../assets/react.svg'
 
 function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const pages = [
-    { label: "Search by Notes", path: "/search" },
-    { label: "Perfumes", path: "/perfumes" },
+    { label: "Nota Bazlı Arama", path: "/" },
+    { label: "Perfümler", path: "/perfumes" },
     { label: "Blog", path: "/blog" },
   ];
 
@@ -29,25 +30,24 @@ function Header() {
   };
 
   return (
-    <AppBar position="absolute" sx={{ width: "100%", backgroundColor: "#4f46e5" }}>
+    <AppBar position="absolute" sx={{ width: "100%", backgroundColor: "#8B0000" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
-        
         {/* Logo */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <img src="/logo.png" alt="Logo" style={{ width: 40, height: 40, marginRight: 8 }} />
+          <img src={logo} alt="Logo" style={{ width: 40, height: 40, marginRight: 8, marginLeft: 15 }} />
           <Typography variant="h6" component="div" sx={{ fontWeight: 700, letterSpacing: ".1rem" }}>
-            PERFUMES
+            KOKU ATLASI
           </Typography>
         </Box>
 
         {/* Orta Menü (Büyük ekran) */}
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 3 }}>
+        <Box sx={{ marginRight:"10rem", display: { xs: 'none', md: 'flex' }, alignItems:"center", justifyContent:"flex-start", gap: 3 }}>
           {pages.map((page) => (
             <Button
               key={page.label}
               component={Link}
               to={page.path}
-              sx={{ color: "white", fontWeight: 500 }}
+              sx={{ color: "white", fontWeight: 600 }}
             >
               {page.label}
             </Button>

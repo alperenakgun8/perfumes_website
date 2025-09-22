@@ -3,11 +3,13 @@ import type { AppDispatch, RootState } from "../../../app/store"
 import { useState } from "react";
 import type { Note } from "../api/types";
 import { addNewNote, deleteExistingNote, updateExistingNote } from "../thunks/noteThunks";
+import { fetchPerfumesByNotes } from "../../perfumes/thunks/perfumeThunks";
 
 export function useNoteForm () {
 
     const dispatch = useDispatch<AppDispatch>();
 
+    const [selectedOptions, setSelectedOptions] = useState<{value: string; label: string}[]>([]);
     const [selectedOption, setSelectedOption] = useState<{value: string; label: string;}>({label: "", value: ""});
     const [name, setName] = useState<string>("");
     const [imageUrl, setImageUrl] = useState<string>("");
@@ -52,6 +54,12 @@ export function useNoteForm () {
         dispatch(deleteExistingNote(selectedOption.value));
         reset();
     }
+    
+    const handleSearch = () => {
+        if(!selectedOptions) return;
+        const noteIds = selectedOptions.map(option => option.value);
+        dispatch(fetchPerfumesByNotes(noteIds));
+    }
 
     return {
         notes,
@@ -61,9 +69,12 @@ export function useNoteForm () {
         setImageUrl,
         selectedOption,
         setSelectedOption,
+        selectedOptions,
+        setSelectedOptions,
         dropDownOptions,
         handleAdd,
         handleUpdate,
-        handleDelete
+        handleDelete,
+        handleSearch
     }
 }

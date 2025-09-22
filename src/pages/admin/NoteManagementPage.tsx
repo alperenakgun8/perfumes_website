@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchNotes } from '../features/notes/thunks/noteThunks';
-import type { AppDispatch } from '../app/store';
+import { fetchNotes } from '../../features/notes/thunks/noteThunks';
+import type { AppDispatch } from '../../app/store';
 
-import NoteList from '../features/notes/components/NoteList';
-import AddNote from '../features/notes/components/AddNote';
-import DeleteNote from '../features/notes/components/DeleteNote';
-import UpdateNote from '../features/notes/components/UpdateNote';
+import NoteList from '../../features/notes/components/NoteList';
+import AddNote from '../../features/notes/components/AddNote';
+import DeleteNote from '../../features/notes/components/DeleteNote';
+import UpdateNote from '../../features/notes/components/UpdateNote';
 
 import { 
   Card,
