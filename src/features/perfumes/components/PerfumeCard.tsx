@@ -20,27 +20,23 @@ function PerfumeCard({_id, brand, name, image_url}: PerfumeCardProps) {
     }
 
   return (
-    <Card sx={{margin: 1, boxShadow: 3, textAlign: "center", cursor:"pointer"}}>
-        <CardActionArea component={Link} to="/detail" onClick={handleClickCard}>
-            <Box sx={{width: 200, height: 300, margin: "0.5rem auto", overflow: "hidden", borderRadius: 1}}>
-            <CardMedia
-                component="img"
-                image={image_url}
-                alt={name}
-                sx={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover"
-                }}
-            />
-            </Box>
-            <CardContent sx={{ padding: "0.25 rem 0"}}>
-                <Typography variant='body2' component="div">
-                    {brand} - {name}
-                </Typography>
-            </CardContent>
-        </CardActionArea>
-    </Card>
+    <Card sx={{ margin: 1, boxShadow: 3, textAlign: "center", cursor: "pointer" }}>
+  <CardActionArea component={Link} to="/detail" onClick={handleClickCard} sx={{ display: "flex", flexDirection: "column" }}>
+    <Box sx={{ width: 200, height: 300, margin: "0.5rem auto", overflow: "hidden", borderRadius: 1 }}>
+      <CardMedia
+        component="img"
+        image={image_url}
+        alt={name}
+        sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+      />
+    </Box>
+    <CardContent sx={{ padding: "0.25rem 0" }}>
+      <Typography variant="body2" component="div">
+        {brand} - {name}
+      </Typography>
+    </CardContent>
+  </CardActionArea>
+</Card>
   )
 }
 

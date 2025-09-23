@@ -1,3 +1,15 @@
+export interface SelectedNote {
+    note_id: string;
+    note_type: "TOP" | "MIDDLE" | "BASE";
+}
+
+interface PerfumeNote {
+    _id: string;
+    name: string;
+    image_url: string;
+    note_type: string;
+}
+
 export interface Perfume {
     _id?: string,
     name: string,
@@ -8,29 +20,8 @@ export interface Perfume {
     image_url: string   
 }
 
-export interface GeneralPerfumeInfo {
-    _id: string,
-    brand: string
-    name: string,
-    image_url: string
-}
-
-
 export interface PerfumeAdd extends Perfume {
     notes: SelectedNote[];
-}
-
-export interface SelectedNote {
-    note_id: string;
-    note_type: "TOP" | "MIDDLE" | "BASE";
-}
-
-
-interface PerfumeNote {
-    _id: string;
-    name: string;
-    image_url: string;
-    note_type: string;
 }
 
 export interface PerfumeDetail {
@@ -44,4 +35,9 @@ export interface PerfumeDetail {
     notes: PerfumeNote[]
 }
 
-
+export interface GeneralPerfumeInfo {
+    _id: string,
+    brand: string
+    name: string,
+    image_url: string
+}

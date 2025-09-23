@@ -20,7 +20,7 @@ function PerfumeList() {
                     {
                         perfumes.map((p) => (
                             <Grid key={p._id}>
-                                <PerfumeCard brand={p.brand} name={p.name} image_url={p.image_url}/>
+                                <PerfumeCard _id={p._id || ""} brand={p.brand} name={p.name} image_url={p.image_url}/>
                             </Grid>
                         ))
                     }

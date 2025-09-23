@@ -31,7 +31,7 @@ function PerfumeDetailsPage() {
               component="img"
               image={perfumeDetail.image_url}
               alt={perfumeDetail.name}
-              sx={{ width: '100%', height: 400, objectFit: 'cover' }}
+              sx={{ width: '100%', height: 400, objectFit: 'contain', margin:"1rem auto" }}
             />
           </Card>
         </Grid>
@@ -39,10 +39,10 @@ function PerfumeDetailsPage() {
         <Grid size={{ xs: 12, md: 7 }} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <Box>
             <Typography variant="h4" component="h1" sx={{ fontWeight: 700 }}>
-              {perfumeDetail.name} ({perfumeDetail.concentration_id.display_name})
+              {perfumeDetail.brand} {perfumeDetail.name} ({perfumeDetail.concentration_id.display_name})
             </Typography>
             <Typography variant="subtitle1" sx={{ color: 'text.secondary', mt: 1 }}>
-              Marka: {perfumeDetail.brand} | Cinsiyet: {perfumeDetail.gender} | Tip: {perfumeDetail.concentration_id.name}
+              Cinsiyet: {perfumeDetail.gender} | Tip: {perfumeDetail.concentration_id.name}
             </Typography>
             <Divider sx={{ my: 2 }} />
             <Typography variant="body1" sx={{ lineHeight: 1.6 }}>

@@ -6,15 +6,31 @@ export const getPerfumes = async (): Promise<Perfume[]> => {
     return response.data.data;
 }
 
+export const getPerfumesWithGeneralInfo = async() : Promise<GeneralPerfumeInfo[]> => {
+    const response = await axiosInstance.get("/perfumes/general");
+    console.log(response.data.data);
+    return response.data.data;
+}
+
 export const getPerfumeById = async(id: string): Promise<PerfumeDetail> => {
     const response = await axiosInstance.get(`/perfumes/${id}`);
     return response.data.data;
 }
 
+export const getBrands = async(): Promise<string[]> => {
+    const response = await axiosInstance.get('/perfumes/brands');
+    return response.data.data;
+} 
+
 export const getPerfumeByNotes = async(noteIds: string[]): Promise<GeneralPerfumeInfo[]> => {
     const response = await axiosInstance.post("/perfumes/bynoteid", { noteIds });
     console.log(response.data.data);
     return response.data.data;
+}
+
+export const getPerfumeByFilter = async(body: {genders: string[], concentrations: string[], brands: string[]}): Promise<GeneralPerfumeInfo[]> => {
+    const response = await axiosInstance.post("/perfumes/filter", body);
+    return response.data.data.data;
 }
 
 export const addPerfume = async (data: PerfumeAdd): Promise<Perfume> => {

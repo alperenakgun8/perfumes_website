@@ -14,9 +14,9 @@ import { FaSearch } from "react-icons/fa";
 import type { RootState } from "../../../app/store";
 import PerfumeCard from "../../perfumes/components/PerfumeCard";
 
-function SearchByNoteBox() {
+function SearchByNoteContent() {
 
-    let selectedPerfumes = useSelector((state: RootState) => state.perfume.selectedPerfumes || []); 
+    let selectedPerfumes = useSelector((state: RootState) => state.perfume.selectedPerfumes || []);
     const { selectedOptions, setSelectedOptions, dropDownOptions, handleSearch } = useNoteForm();
 
   return (
@@ -74,6 +74,7 @@ function SearchByNoteBox() {
     </Card>
     
     <Card sx={{maxWidth: "100%", marginTop:"1rem"}}>
+      
       <CardContent>
         {
             selectedPerfumes.length !== 0 && (
@@ -94,4 +95,4 @@ function SearchByNoteBox() {
   )
 }
 
-export default SearchByNoteBox
+export default SearchByNoteContent

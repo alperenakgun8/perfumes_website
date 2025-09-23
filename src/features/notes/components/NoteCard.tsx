@@ -7,11 +7,11 @@ interface NoteCardProps {
 
 function NoteCard({ name, image_url }: NoteCardProps) {
   return (
-    <Card sx={{ width: 70, margin: 1, boxShadow: 3, textAlign: "center" }}>
+    <Card sx={{ width: 80, margin: 1, boxShadow: 3, textAlign: "center" }}>
       <Box
         sx={{
-          width: 50,
-          height: 50,
+          width: 65,
+          height: 65,
           margin: "0.5rem auto",
           overflow: "hidden",
           borderRadius: 1, // isteğe bağlı hafif yuvarlatma

@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Perfume, GeneralPerfumeInfo, PerfumeDetail } from "../api/types";
-import { fetchPerfumes, addNewPerfume, deleteExistingPerfume, updateExistingPerfume, fetchPerfumesByNotes, fetchPerfumeById } from "../thunks/perfumeThunks";
-import { getPerfumeById } from "../api/perfumeApi";
-
+import { fetchPerfumes, addNewPerfume, deleteExistingPerfume, updateExistingPerfume, fetchPerfumesByNotes, fetchPerfumeById, fetchSelectedPerfumes, fetchBrands, fetchPerfumesByFilter } from "../thunks/perfumeThunks";
 export interface PerfumeState {
     perfumes: Perfume[];
     selectedPerfumes: GeneralPerfumeInfo[];
     perfumeDetail: PerfumeDetail;
+    brands: string[];
 }
 
 const initialState: PerfumeState = {
     perfumes: [],
     selectedPerfumes: [],
-    perfumeDetail: {name: "", brand:"", concentration_id:"", description: "", gender: "", image_url: "", _id: "", notes:[]}
+    perfumeDetail: {name: "", brand:"", concentration_id: {_id: "", name: "", display_name: ""}, description: "", gender: "", image_url: "", _id: "", notes:[]},
+    brands: []
 }
 
 export const perfumeSlice = createSlice({
@@ -23,8 +23,21 @@ export const perfumeSlice = createSlice({
 
     },
     extraReducers: (builder) => {
+
+        builder.addCase(fetchBrands.fulfilled, (state,action: PayloadAction<string[]>) => {
+            state.brands = action.payload;
+        });
+
+        builder.addCase(fetchPerfumesByFilter.fulfilled, (state, action: PayloadAction<GeneralPerfumeInfo[]>) => {
+            state.selectedPerfumes = action.payload;
+        });
+
         builder.addCase(fetchPerfumes.fulfilled, (state, action: PayloadAction<Perfume[]>) => {
             state.perfumes = action.payload;
+        });
+
+        builder.addCase(fetchSelectedPerfumes.fulfilled, (state, action: PayloadAction<GeneralPerfumeInfo[]>) => {
+            state.selectedPerfumes = action.payload;
         });
         
         builder.addCase(fetchPerfumesByNotes.fulfilled, (state, action: PayloadAction<GeneralPerfumeInfo[]>) => {

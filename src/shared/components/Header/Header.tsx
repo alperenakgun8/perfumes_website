@@ -17,7 +17,7 @@ function Header() {
 
   const pages = [
     { label: "Nota Bazlı Arama", path: "/" },
-    { label: "Perfümler", path: "/perfumes" },
+    { label: "Parfümler", path: "/perfumes" },
     { label: "Blog", path: "/blog" },
   ];
 
@@ -36,7 +36,7 @@ function Header() {
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <img src={logo} alt="Logo" style={{ width: 40, height: 40, marginRight: 8, marginLeft: 15 }} />
           <Typography variant="h6" component="div" sx={{ fontWeight: 700, letterSpacing: ".1rem" }}>
-            KOKU ATLASI
+            PARFÜMLER
           </Typography>
         </Box>
 

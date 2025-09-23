@@ -1,11 +1,35 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { Perfume, PerfumeAdd } from "../api/types";
-import { getPerfumes, addPerfume, updatePerfume, deletePerfume, getPerfumeByNotes, getPerfumeById } from "../api/perfumeApi";
+import { getPerfumes, addPerfume, updatePerfume, deletePerfume, getPerfumeByNotes, getPerfumeById, getPerfumesWithGeneralInfo, getBrands, getPerfumeByFilter } from "../api/perfumeApi";
 
 export const fetchPerfumes = createAsyncThunk(
     "perfume/fetchAll",
     async() => {
         const data = await getPerfumes();
+        return data;
+    }
+);
+
+export const fetchBrands = createAsyncThunk(
+    "perfume/fetchBrands",
+    async() => {
+        const data = await getBrands();
+        return data;
+    }
+);
+
+export const fetchSelectedPerfumes = createAsyncThunk(
+    "perfume/fetchSelectedPerfumes",
+    async () => {
+        const data = await getPerfumesWithGeneralInfo();
+        return data;
+    }
+);
+
+export const fetchPerfumesByFilter = createAsyncThunk(
+    "perfume/fetchPerfumeByFilter",
+    async(body: {genders: string[], concentrations: string[], brands: string[]}) => {
+        const data = await getPerfumeByFilter(body);
         return data;
     }
 );

@@ -10,7 +10,7 @@ export function usePerfumeForm () {
     const perfumes = useSelector((state: RootState) => state.perfume.perfumes);
     const concentrations = useSelector((state: RootState) => state.concentration.concentrations);
     const noteList = useSelector((state: RootState) => state.note.notes);
-    const genders = ["Male", "Female", "Unisex"];
+    const genders = ["Kadın", "Erkek", "Unisex"];
 
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
