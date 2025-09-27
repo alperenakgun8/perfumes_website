@@ -9,10 +9,21 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/react.svg'
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../../../app/store';
+import { logout } from '../../../features/users/slices/userSlice';
 
 function Header() {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const isAdmin = useSelector((state: RootState) => state.user.isAdmin);
+  const isSuperAdmin = useSelector((state: RootState) => state.user.isSuperAdmin);
+  const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
+
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const pages = [
@@ -28,6 +39,12 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setAnchorElUser(null);
+    navigate("/");
+  }
 
   return (
     <AppBar position="absolute" sx={{ width: "100%", backgroundColor: "#8B0000" }}>
@@ -68,10 +85,18 @@ function Header() {
             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
           >
-            <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
-            <MenuItem onClick={handleCloseUserMenu}>Account</MenuItem>
-            <MenuItem component={Link} to="/admin/concentration" onClick={handleCloseUserMenu}>Admin Panel</MenuItem>
-            <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
+            {isAuthenticated ? [
+    <MenuItem component={Link} to="/profile/profile" key="profile" onClick={handleCloseUserMenu}>Profile</MenuItem>,
+    (isAdmin || isSuperAdmin) && (
+      <MenuItem key="admin" component={Link} to="/admin/concentration" onClick={handleCloseUserMenu}>
+        Admin Panel
+      </MenuItem>
+    ),
+    <MenuItem key="logout" onClick={handleLogout}>Logout</MenuItem>
+  ] : [
+    <MenuItem key="login" component={Link} to="/login" onClick={handleCloseUserMenu}>Login</MenuItem>,
+    <MenuItem key="register" component={Link} to="/register" onClick={handleCloseUserMenu}>Register</MenuItem>
+  ]}
           </Menu>
         </Box>
       </Toolbar>

@@ -1,18 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { Perfume, GeneralPerfumeInfo, PerfumeDetail } from "../api/types";
-import { fetchPerfumes, addNewPerfume, deleteExistingPerfume, updateExistingPerfume, fetchPerfumesByNotes, fetchPerfumeById, fetchSelectedPerfumes, fetchBrands, fetchPerfumesByFilter } from "../thunks/perfumeThunks";
+import type { Perfume, GeneralPerfumeInfo } from "../api/types";
+import { fetchPerfumes, addNewPerfume, deleteExistingPerfume, updateExistingPerfume, fetchPerfumesByNotes, fetchSelectedPerfumes, fetchBrands, fetchPerfumesByFilter } from "../thunks/perfumeThunks";
 export interface PerfumeState {
     perfumes: Perfume[];
     selectedPerfumes: GeneralPerfumeInfo[];
-    perfumeDetail: PerfumeDetail;
     brands: string[];
 }
 
 const initialState: PerfumeState = {
     perfumes: [],
     selectedPerfumes: [],
-    perfumeDetail: {name: "", brand:"", concentration_id: {_id: "", name: "", display_name: ""}, description: "", gender: "", image_url: "", _id: "", notes:[]},
     brands: []
 }
 
@@ -42,10 +40,6 @@ export const perfumeSlice = createSlice({
         
         builder.addCase(fetchPerfumesByNotes.fulfilled, (state, action: PayloadAction<GeneralPerfumeInfo[]>) => {
             state.selectedPerfumes = action.payload;
-        });
-
-        builder.addCase(fetchPerfumeById.fulfilled, (state, action: PayloadAction<PerfumeDetail>) => {
-            state.perfumeDetail = action.payload;
         });
 
         builder.addCase(addNewPerfume.fulfilled, (state, action) => {

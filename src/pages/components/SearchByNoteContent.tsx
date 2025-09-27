@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useNoteForm } from "../hooks/useNoteForm";
+import { useNoteForm } from "../../features/notes/hooks/useNoteForm";
 import { 
     Card,
     CardContent,
@@ -11,8 +11,8 @@ import {
     IconButton
  } from "@mui/material";
 import { FaSearch } from "react-icons/fa";
-import type { RootState } from "../../../app/store";
-import PerfumeCard from "../../perfumes/components/PerfumeCard";
+import type { RootState } from "../../app/store";
+import PerfumeCard from "../../features/perfumes/components/PerfumeCard";
 
 function SearchByNoteContent() {
 

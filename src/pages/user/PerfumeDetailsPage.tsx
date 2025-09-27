@@ -1,10 +1,38 @@
-import type { RootState } from '../../app/store';
-import { useSelector } from 'react-redux';
-import { Box, Typography, Card, CardMedia, Grid, Divider } from '@mui/material';
+import { Box, Typography, Card, CardMedia, Grid, Divider, Button } from '@mui/material';
 import NoteCard from '../../features/notes/components/NoteCard';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getPerfumeById } from '../../features/perfumes/api/perfumeApi';
+import type { PerfumeDetail } from '../../features/perfumes/api/types';
 
 function PerfumeDetailsPage() {
-  const perfumeDetail = useSelector((state: RootState) => state.perfume.perfumeDetail);
+
+  const { id } = useParams<{ id: string }>();
+
+  const [perfumeDetail, setPerfumeDetail] = useState<PerfumeDetail | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if(!id) return;
+      setIsLoading(true);
+      try{
+        const data = await getPerfumeById(id);
+        setPerfumeDetail(data);
+      } catch (err) {
+        console.log("Perfume fetch error:" , err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  },[id]);
+
+  if(isLoading) {
+    return <Typography sx={{ mt: 4, textAlign: "center" }}>Yükleniyor...</Typography>;
+  }
 
   if (!perfumeDetail?._id) {
     return <Typography variant="h6" sx={{ mt: 4, textAlign: 'center' }}>Parfüm bulunamadı.</Typography>;
@@ -21,6 +49,10 @@ function PerfumeDetailsPage() {
   });
 
   const noteOrder: ('TOP' | 'MIDDLE' | 'BASE')[] = ['TOP', 'MIDDLE', 'BASE'];
+
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite);
+  }
 
   return (
     <Box sx={{ maxWidth: 900, margin: '2rem auto', padding: 2 }}>
@@ -44,6 +76,18 @@ function PerfumeDetailsPage() {
             <Typography variant="subtitle1" sx={{ color: 'text.secondary', mt: 1 }}>
               Cinsiyet: {perfumeDetail.gender} | Tip: {perfumeDetail.concentration_id.name}
             </Typography>
+
+            {/* Favori Butonu */}
+            <Button 
+              onClick={handleFavoriteClick} 
+              sx={{ display: 'flex', alignItems: 'center', mt: 2 }}
+              variant="outlined"
+              color={isFavorite ? "error" : "primary"}
+            >
+              {isFavorite ? <FaHeart /> : <FaRegHeart />}
+              <Typography sx={{ ml: 1 }}>{isFavorite ? 'Favorilerden Çıkar' : 'Favorilere Ekle'}</Typography>
+            </Button>
+
             <Divider sx={{ my: 2 }} />
             <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
               {perfumeDetail.description}

@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from '../../../app/store';
-import PerfumeCard from '../../perfumes/components/PerfumeCard';
+import type { AppDispatch, RootState } from '../../app/store';
+import PerfumeCard from '../../features/perfumes/components/PerfumeCard';
 import { 
     Card,
     CardContent,
@@ -12,8 +12,8 @@ import {
     Chip,
     Button
  } from "@mui/material";
-import type { Concentration } from '../../concentrations/api/types';
-import { fetchPerfumesByFilter } from '../../perfumes/thunks/perfumeThunks';
+import type { Concentration } from '../../features/concentrations/api/types';
+import { fetchPerfumesByFilter } from '../../features/perfumes/thunks/perfumeThunks';
 
 function SearchPerfumeContent() {
 
@@ -34,10 +34,17 @@ function SearchPerfumeContent() {
     );
 
     const handleFilter = () => {
+
+        let concentrations: string[] = [];
+
+         selectedConcentrations.map(c => {
+            if(c._id) concentrations.push(c._id);
+         })
+        
         const body = {
             brands: selectedBrands,
             genders: selectedGenders,
-            concentrations: selectedConcentrations?.map(c => c._id) || []
+            concentrations: concentrations
         }
         dispatch(fetchPerfumesByFilter(body));
     }
@@ -135,7 +142,7 @@ function SearchPerfumeContent() {
                         />
                     </Grid>
                     <Grid size={{xs: 12, md: 12, lg: 1}} sx={{ display: "flex", alignItems: "center" }}>
-                        <Button onClick={handleFilter} variant="contained" color='secondary'>
+                        <Button onClick={handleFilter} variant="contained" color='error'>
                             Filtrele
                         </Button>
                     </Grid>

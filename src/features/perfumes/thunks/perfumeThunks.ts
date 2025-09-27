@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { Perfume, PerfumeAdd } from "../api/types";
-import { getPerfumes, addPerfume, updatePerfume, deletePerfume, getPerfumeByNotes, getPerfumeById, getPerfumesWithGeneralInfo, getBrands, getPerfumeByFilter } from "../api/perfumeApi";
+import { getPerfumes, addPerfume, updatePerfume, deletePerfume, getPerfumeByNotes, getPerfumesWithGeneralInfo, getBrands, getPerfumeByFilter } from "../api/perfumeApi";
 
 export const fetchPerfumes = createAsyncThunk(
     "perfume/fetchAll",
@@ -38,14 +38,6 @@ export const fetchPerfumesByNotes = createAsyncThunk(
     "perfume/fetchByNotes",
     async(noteIds: string[]) => {
         const data = await getPerfumeByNotes(noteIds);
-        return data;
-    }
-);
-
-export const fetchPerfumeById = createAsyncThunk(
-    "perfume/fetchById",
-    async(id: string) => {
-        const data = await getPerfumeById(id);
         return data;
     }
 );

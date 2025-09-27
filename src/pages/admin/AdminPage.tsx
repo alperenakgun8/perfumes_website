@@ -9,10 +9,10 @@ function AdminPage() {
   const location = useLocation();
 
   const menuItems = [
-    { text: "Concentrations", path: "/admin/concentration" },
-    { text: "Notes", path: "/admin/note" },
-    { text: "Perfumes", path: "/admin/perfume" },
-    { text: "Users", path: "/admin/user"}
+    { text: "Konsantrasyon", path: "/admin/concentration" },
+    { text: " Notalar", path: "/admin/note" },
+    { text: "Parfümler", path: "/admin/perfume" },
+    { text: "Kullanıcılar", path: "/admin/user"}
   ];
 
   // Mouse konumunu takip et
