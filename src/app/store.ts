@@ -3,6 +3,7 @@ import concentrationReducer from '../features/concentrations/slices/concentratio
 import noteReducer from '../features/notes/slices/noteSlice';
 import perfumeReducer from '../features/perfumes/slices/perfumeSlice';
 import  userReducer  from '../features/users/slices/userSlice';
+import  commentReducer  from '../features/comments/slices/commentSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     note: noteReducer,
     perfume: perfumeReducer,
     user: userReducer,
+    comment: commentReducer
   },
 })
 

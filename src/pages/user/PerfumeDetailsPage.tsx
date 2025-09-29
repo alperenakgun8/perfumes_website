@@ -1,18 +1,46 @@
-import { Box, Typography, Card, CardMedia, Grid, Divider, Button } from '@mui/material';
+import { Box, Typography, Card, CardMedia, Grid, Divider, Button, TextField, Rating } from '@mui/material';
 import NoteCard from '../../features/notes/components/NoteCard';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getPerfumeById } from '../../features/perfumes/api/perfumeApi';
 import type { PerfumeDetail } from '../../features/perfumes/api/types';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../../app/store';
+import { addUserFavorite, deleteUserFavorite } from '../../features/users/thunks/userThunks';
+import CommentCard from '../../features/comments/components/CommentCard';
+import { addCommentToPerfumeAndUser, fetchPerfumeComments } from '../../features/comments/thunks/commentThunk';
+import type { AddComment } from '../../features/comments/api/types';
 
 function PerfumeDetailsPage() {
 
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
   const { id } = useParams<{ id: string }>();
+
+  const userId = useSelector((state: RootState) => state.user.user._id);
 
   const [perfumeDetail, setPerfumeDetail] = useState<PerfumeDetail | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
+
+  const [comment, setComment] = useState<string>("");
+  const [isCommenting, setIsCommenting] = useState<boolean>(false);
+
+  const [rating, setRating] = useState<number | null>(0);
+
+  const favorites = useSelector((state: RootState) => state.user.favorites);
+  const comments = useSelector((state: RootState) => state.comment.perfumeComments);
+
+  useEffect(() => {
+    if(id) dispatch(fetchPerfumeComments(id));
+  }, [id]);
+
+  useEffect(() => {
+    const isFav = favorites.some(f => f._id === id);
+    setIsFavorite(isFav);
+  }, [id, favorites]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,8 +78,35 @@ function PerfumeDetailsPage() {
 
   const noteOrder: ('TOP' | 'MIDDLE' | 'BASE')[] = ['TOP', 'MIDDLE', 'BASE'];
 
-  const handleFavoriteClick = () => {
-    setIsFavorite(!isFavorite);
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if(userId && id) {
+      const body = {user_id: userId, perfume_id: id};
+      if(isFavorite) {
+        dispatch(deleteUserFavorite(body));
+      } else {
+        dispatch(addUserFavorite(body));
+      }
+    } else {
+      navigate("/login");
+    }
+  }
+
+  const handleSubmitComment = () => {
+
+    if(comment.trim().length !== 0 && rating !== null) {
+      const body: AddComment = {
+        content: comment.trim(),
+        perfume_id: id || "",
+        user_id: userId || "",
+        rating: rating
+      }
+      dispatch(addCommentToPerfumeAndUser(body));
+      dispatch(fetchPerfumeComments(id || ""));
+      setComment("");
+      setIsCommenting(false);
+      setRating(0);
+    }
   }
 
   return (
@@ -82,7 +137,7 @@ function PerfumeDetailsPage() {
               onClick={handleFavoriteClick} 
               sx={{ display: 'flex', alignItems: 'center', mt: 2 }}
               variant="outlined"
-              color={isFavorite ? "error" : "primary"}
+              color={isFavorite ? "error" : "info"}
             >
               {isFavorite ? <FaHeart /> : <FaRegHeart />}
               <Typography sx={{ ml: 1 }}>{isFavorite ? 'Favorilerden Çıkar' : 'Favorilere Ekle'}</Typography>
@@ -119,6 +174,83 @@ function PerfumeDetailsPage() {
           })}
         </Box>
       )}
+      
+      {
+        isCommenting ? (
+          <>
+            <Grid size={{xs: 12}} sx={{mt: 5}}>
+              <Typography variant='subtitle1' sx={{mb: 1}}>
+                Parfüme Puanınız:
+              </Typography>
+              <Rating
+                name='parfume_rating'
+                value={rating}
+                onChange={(event, newValue) => setRating(newValue)}
+                precision={1}
+              />
+            </Grid>
+            <Grid size={{xs: 12}}>
+            <TextField
+              fullWidth
+              multiline
+              rows={4}
+              label="Yorum yap..."
+              value={comment}
+              placeholder='Yorum yap...'
+              onChange={(e) => setComment(e.target.value)}
+              sx={{mt: 1}}
+            />
+            </Grid>
+            <Grid size={{xs: 12}}>
+              <Box sx={{mt: 2 ,width:"100%", display: "flex", alignItems: "flex-end", justifyContent: "flex-end" , gap: "1rem"}}>
+                <Button 
+              onClick={handleSubmitComment} 
+              sx={{ alignItems: 'center'}}
+              variant="outlined"
+              color="success"
+            >
+              Gönder
+            </Button>
+              <Button 
+              onClick={() => setIsCommenting(false)} 
+              sx={{ alignItems: 'center'}}
+              variant="outlined"
+              color="error"
+            >
+              Vazgeç
+            </Button>
+              </Box>
+            </Grid>
+          </>
+        ) : (
+          <Grid size = {{xs: 12}}>
+            <Button 
+              onClick={() => setIsCommenting(true)} 
+              sx={{ display: 'flex', justifySelf: "flex-end", alignItems: 'center', mt: 2 }}
+              variant="outlined"
+              color="info"
+            >
+              Yorum Yap
+            </Button>
+          </Grid>
+        )
+      }
+
+      {
+        (comments.length === 0) ? (
+          <Grid size={{xs: 12}}>
+            <Typography marginTop= {2}>
+              Henüz yorum yapılmamış. İlk yorumu sen yap!!
+            </Typography>
+          </Grid>
+        ) : (
+          comments.map(c => (
+            <Grid key={c._id} marginTop={2} size={{xs: 12}}>
+              <CommentCard comment={c}/>
+            </Grid>
+          ))
+        )
+      }
     </Box>
   );
 }

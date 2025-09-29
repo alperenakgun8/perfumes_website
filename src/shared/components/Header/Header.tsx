@@ -14,12 +14,15 @@ import logo from '../../../assets/react.svg'
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../../app/store';
 import { logout } from '../../../features/users/slices/userSlice';
+import { BASE_URL } from '../../../config/axiosInstance';
 
 function Header() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const baseurl = BASE_URL;
 
+  const user = useSelector((state: RootState) => state.user.user);
   const isAdmin = useSelector((state: RootState) => state.user.isAdmin);
   const isSuperAdmin = useSelector((state: RootState) => state.user.isSuperAdmin);
   const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
@@ -75,7 +78,12 @@ function Header() {
         <Box>
           <Tooltip title="Open menu">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="User Avatar" src="/static/images/avatar/1.jpg" />
+              <Avatar
+                src={`${baseurl}${user.profile_picture}`}
+                alt={user.nickname}
+              > 
+                {user.first_name?.[0]}
+              </Avatar>
             </IconButton>
           </Tooltip>
           <Menu
