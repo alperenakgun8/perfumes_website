@@ -32,7 +32,7 @@ function Header() {
   const pages = [
     { label: "Nota Bazlı Arama", path: "/" },
     { label: "Parfümler", path: "/perfumes" },
-    { label: "Blog", path: "/blog" },
+    { label: "Forum", path: "/forum" },
   ];
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -53,7 +53,7 @@ function Header() {
     <AppBar position="absolute" sx={{ width: "100%", backgroundColor: "#8B0000" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
         {/* Logo */}
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: "flex", alignItems: "center"}}>
           <img src={logo} alt="Logo" style={{ width: 40, height: 40, marginRight: 8, marginLeft: 15 }} />
           <Typography variant="h6" component="div" sx={{ fontWeight: 700, letterSpacing: ".1rem" }}>
             PARFÜMLER
@@ -61,7 +61,7 @@ function Header() {
         </Box>
 
         {/* Orta Menü (Büyük ekran) */}
-        <Box sx={{ marginRight:"10rem", display: { xs: 'none', md: 'flex' }, alignItems:"center", justifyContent:"flex-start", gap: 3 }}>
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems:"center", justifyContent:"flex-start", gap: 3 }}>
           {pages.map((page) => (
             <Button
               key={page.label}

@@ -2,8 +2,8 @@ import { Container, Paper, Avatar, Typography, Box, TextField, Button, Grid, Lin
 import { useState } from "react";
 import { FaRegRegistered } from "react-icons/fa";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import type { UserRegister } from "../../features/users/api/types";
-import { addUser } from "../../features/users/api/userApi";
+import type { UserRegister } from "../../../features/users/api/types";
+import { addUser } from "../../../features/users/api/userApi";
 
 function RegisterPage() {
 

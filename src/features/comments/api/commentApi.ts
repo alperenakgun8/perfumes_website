@@ -1,5 +1,5 @@
 import axiosInstance from "../../../config/axiosInstance";
-import type { Comment } from "./types";
+import type { Comment, AddComment } from "./types";
 
 export const getUserComments = async (id: string): Promise<Comment[]> => {
     const response = await axiosInstance.get(`/comments/user/${id}`);

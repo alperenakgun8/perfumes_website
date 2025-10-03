@@ -4,22 +4,29 @@ import ConcentrationManagementPage from "../pages/admin/ConcentrationManagementP
 import NoteManagementPage from "../pages/admin/NoteManagementPage";
 import PerfumeManagementPage from "../pages/admin/PerfumeManagementPage";
 import UserManagementPage from "../pages/admin/UserManagementPage";
-import SearchByNotesPage from "../pages/user/SearchByNotesPage";
-import PerfumeDetailsPage from "../pages/user/PerfumeDetailsPage";
-import SearchPerfumePage from "../pages/user/SearchPerfumePage";
-import LoginPage from "../pages/user/LoginPage";
-import RegisterPage from "../pages/user/RegisterPage";
-import ProfilePage from "../pages/user/ProfilePage";
-import ProfileManagement from "../pages/user/ProfileManagement";
-import FavoritesPage from "../pages/user/FavoritesPage";
-import PasswordManagementPage from "../pages/user/PasswordManagementPage";
+import SearchByNotesPage from "../pages/user/PerfumePages/SearchByNotesPage";
+import PerfumeDetailsPage from "../pages/user/PerfumePages/PerfumeDetailsPage";
+import SearchPerfumePage from "../pages/user/PerfumePages/SearchPerfumePage";
+import LoginPage from "../pages/user/AuthPages/LoginPage";
+import RegisterPage from "../pages/user/AuthPages/RegisterPage";
+import ProfilePage from "../pages/user/ProfilePages/ProfilePage";
+import ProfileManagement from "../pages/user/ProfilePages/ProfileManagement";
+import FavoritesPage from "../pages/user/ProfilePages/FavoritesPage";
+import PasswordManagementPage from "../pages/user/ProfilePages/PasswordManagementPage";
+import ForumPage from "../pages/user/ForumPages/ForumPage";
+import TopicDetailsPage from "../pages/user/ForumPages/TopicDetailsPage";
+import CreateTopicPage from "../pages/user/ForumPages/CreateTopicPage";
 
 function Router() {
     return(
         <Routes>
             <Route path="/" element={<SearchByNotesPage />} />
-            <Route path="/detail/:id" element={<PerfumeDetailsPage />} />
+            <Route path="/perfumedetail/:id" element={<PerfumeDetailsPage />} />
             <Route path="/perfumes" element={<SearchPerfumePage />} />
+
+            <Route path="/forum" element={<ForumPage/>}/>
+            <Route path="/createtopic" element={<CreateTopicPage/>}/>
+            <Route path="/topicdetail/:id" element={<TopicDetailsPage/>}/>
 
             <Route path="/profile" element={<ProfilePage />}>
                 <Route path="profile" element={<ProfileManagement/>}/>

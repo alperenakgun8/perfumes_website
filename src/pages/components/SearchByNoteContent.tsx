@@ -8,7 +8,8 @@ import {
     TextField,
     Checkbox,
     InputAdornment,
-    IconButton
+    IconButton,
+    Box
  } from "@mui/material";
 import { FaSearch } from "react-icons/fa";
 import type { RootState } from "../../app/store";
@@ -21,7 +22,8 @@ function SearchByNoteContent() {
 
   return (
    <>
-    <Card sx={{margin: "2rem auto", padding: "0.5rem", width: "600px"}}>
+    <Box marginTop="2rem" display="flex" alignItems="center" justifyContent="center">
+        <Card sx={{width: {sm: "600px"}}}>
         <Grid container spacing={1}>
           <Grid size={{xs:12}}>
             <Autocomplete
@@ -72,6 +74,7 @@ function SearchByNoteContent() {
           </Grid>
         </Grid>
     </Card>
+    </Box>
     
     <Card sx={{maxWidth: "100%", marginTop:"1rem"}}>
       

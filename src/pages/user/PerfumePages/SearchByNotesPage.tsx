@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import type { AppDispatch } from '../../app/store';
-import { fetchNotes } from '../../features/notes/thunks/noteThunks';
-import SearchByNoteContent from '../components/SearchByNoteContent';
-import { fetchSelectedPerfumes } from '../../features/perfumes/thunks/perfumeThunks';
+import type { AppDispatch } from '../../../app/store';
+import { fetchNotes } from '../../../features/notes/thunks/noteThunks';
+import SearchByNoteContent from '../../components/SearchByNoteContent';
+import { fetchSelectedPerfumes } from '../../../features/perfumes/thunks/perfumeThunks';
 
 function SearchByNotesPage() {
 

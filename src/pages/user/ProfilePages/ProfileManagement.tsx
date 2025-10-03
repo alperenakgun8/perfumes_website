@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../app/store";
+import type { AppDispatch, RootState } from "../../../app/store";
 import {
   Container,
   Avatar,
@@ -12,9 +12,9 @@ import {
   Divider,
   TextField
 } from "@mui/material";
-import type { UserUpdate } from "../../features/users/api/types";
-import { updateExistingUser, updateExistingUserProfilePicture } from "../../features/users/thunks/userThunks";
-import { BASE_URL } from "../../config/axiosInstance";
+import type { UserUpdate } from "../../../features/users/api/types";
+import { updateExistingUser, updateExistingUserProfilePicture } from "../../../features/users/thunks/userThunks";
+import { BASE_URL } from "../../../config/axiosInstance";
 
 function ProfileManagement() {
 

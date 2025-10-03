@@ -28,8 +28,8 @@ export const commentSlice = createSlice({
         });
 
         builder.addCase(addCommentToPerfumeAndUser.fulfilled, (state, action: PayloadAction<Comment>) => {
-            state.perfumeComments = [...state.perfumeComments, action.payload];
-            state.userComments  = [...state.userComments , action.payload];
+            state.perfumeComments = [action.payload, ...state.perfumeComments];
+            state.userComments  = [action.payload, ...state.userComments];
         });
 
         builder.addCase(deleteCommentFromPerfumeAndUser.fulfilled, (state, action:PayloadAction<string>) => {

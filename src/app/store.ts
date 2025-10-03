@@ -3,7 +3,9 @@ import concentrationReducer from '../features/concentrations/slices/concentratio
 import noteReducer from '../features/notes/slices/noteSlice';
 import perfumeReducer from '../features/perfumes/slices/perfumeSlice';
 import  userReducer  from '../features/users/slices/userSlice';
-import  commentReducer  from '../features/comments/slices/commentSlice';
+import commentReducer from '../features/comments/slices/commentSlice';
+import  topicReducer  from '../features/topics/slices/topicSlice';
+import topicsCommentReducer from '../features/topicsComment/slices/topicsCommentSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,11 +13,12 @@ export const store = configureStore({
     note: noteReducer,
     perfume: perfumeReducer,
     user: userReducer,
-    comment: commentReducer
+    comment: commentReducer,
+    topic: topicReducer,
+    topic_comment: topicsCommentReducer
   },
-})
+});
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+
 export type AppDispatch = typeof store.dispatch

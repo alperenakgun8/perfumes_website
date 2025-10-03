@@ -1,9 +1,9 @@
 import { Container, Paper, Avatar, Typography, Box, TextField, Button } from "@mui/material"
 import { useState } from "react"
 import { useSelector } from "react-redux";
-import type { RootState } from "../../app/store";
-import type { UserUpdatePassword } from "../../features/users/api/types";
-import { updatePassword } from "../../features/users/api/userApi";
+import type { RootState } from "../../../app/store";
+import type { UserUpdatePassword } from "../../../features/users/api/types";
+import { updatePassword } from "../../../features/users/api/userApi";
 import { useNavigate } from "react-router-dom";
 import { MdOutlinePassword } from "react-icons/md";
 

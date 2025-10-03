@@ -1,16 +1,18 @@
-import { Box, Typography, Card, CardMedia, Grid, Divider, Button, TextField, Rating } from '@mui/material';
-import NoteCard from '../../features/notes/components/NoteCard';
+import { Box, Typography, Card, CardMedia, Grid, Divider, Button, Rating } from '@mui/material';
+import NoteCard from '../../../features/notes/components/NoteCard';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getPerfumeById } from '../../features/perfumes/api/perfumeApi';
-import type { PerfumeDetail } from '../../features/perfumes/api/types';
+import { getPerfumeById } from '../../../features/perfumes/api/perfumeApi';
+import type { PerfumeDetail } from '../../../features/perfumes/api/types';
 import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from '../../app/store';
-import { addUserFavorite, deleteUserFavorite } from '../../features/users/thunks/userThunks';
-import CommentCard from '../../features/comments/components/CommentCard';
-import { addCommentToPerfumeAndUser, fetchPerfumeComments } from '../../features/comments/thunks/commentThunk';
-import type { AddComment } from '../../features/comments/api/types';
+import type { AppDispatch, RootState } from '../../../app/store';
+import { addUserFavorite, deleteUserFavorite } from '../../../features/users/thunks/userThunks';
+import CommentCard from '../../../features/comments/components/CommentCard';
+import { addCommentToPerfumeAndUser, fetchPerfumeComments } from '../../../features/comments/thunks/commentThunk';
+import type { AddComment } from '../../../features/comments/api/types';
+import ReactQuill from "react-quill-new";
+import "react-quill-new/dist/quill.snow.css";
 
 function PerfumeDetailsPage() {
 
@@ -20,6 +22,7 @@ function PerfumeDetailsPage() {
   const { id } = useParams<{ id: string }>();
 
   const userId = useSelector((state: RootState) => state.user.user._id);
+  const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
 
   const [perfumeDetail, setPerfumeDetail] = useState<PerfumeDetail | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -94,9 +97,9 @@ function PerfumeDetailsPage() {
 
   const handleSubmitComment = () => {
 
-    if(comment.trim().length !== 0 && rating !== null) {
+    if(rating !== null) {
       const body: AddComment = {
-        content: comment.trim(),
+        content: comment,
         perfume_id: id || "",
         user_id: userId || "",
         rating: rating
@@ -106,6 +109,14 @@ function PerfumeDetailsPage() {
       setComment("");
       setIsCommenting(false);
       setRating(0);
+    }
+  }
+
+  const handleCommenting = () => {
+    if (isAuthenticated) {
+      setIsCommenting(true);
+    } else {
+      navigate("/login");
     }
   }
 
@@ -190,7 +201,20 @@ function PerfumeDetailsPage() {
               />
             </Grid>
             <Grid size={{xs: 12}}>
-            <TextField
+              <ReactQuill
+                theme='snow'
+                value={comment}
+                onChange={setComment}
+                placeholder='Yorum yap...'
+                style={{marginTop: "1rem", height: "150px"}}
+                modules={{
+                  toolbar: [
+                    ["bold", "italic", "underline"],
+                    ["link"]
+                  ]
+                }}
+              />
+            {/* <TextField
               fullWidth
               multiline
               rows={4}
@@ -199,10 +223,10 @@ function PerfumeDetailsPage() {
               placeholder='Yorum yap...'
               onChange={(e) => setComment(e.target.value)}
               sx={{mt: 1}}
-            />
+            /> */}
             </Grid>
             <Grid size={{xs: 12}}>
-              <Box sx={{mt: 2 ,width:"100%", display: "flex", alignItems: "flex-end", justifyContent: "flex-end" , gap: "1rem"}}>
+              <Box sx={{mt: 7 ,width:"100%", display: "flex", alignItems: "flex-end", justifyContent: "flex-end" , gap: "1rem"}}>
                 <Button 
               onClick={handleSubmitComment} 
               sx={{ alignItems: 'center'}}
@@ -225,7 +249,7 @@ function PerfumeDetailsPage() {
         ) : (
           <Grid size = {{xs: 12}}>
             <Button 
-              onClick={() => setIsCommenting(true)} 
+              onClick={handleCommenting} 
               sx={{ display: 'flex', justifySelf: "flex-end", alignItems: 'center', mt: 2 }}
               variant="outlined"
               color="info"

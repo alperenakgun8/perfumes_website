@@ -52,7 +52,7 @@ function PerfumeCard({_id, brand, name, image_url}: PerfumeCardProps) {
       >
         {isFavorite ? <FaHeart /> : <FaRegHeart />}
       </IconButton>
-  <CardActionArea  component={Link} to={`/detail/${_id}`} 
+  <CardActionArea  component={Link} to={`/perfumedetail/${_id}`} 
   sx={{ display: "flex", flexDirection: "column" }}>
     <Box sx={{ width: 200, height: 300, margin: "1.5rem", overflow: "hidden", borderRadius: 1 }}>
       <CardMedia

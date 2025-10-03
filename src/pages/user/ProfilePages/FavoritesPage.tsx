@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import type { RootState } from '../../app/store';
-import PerfumeCard from '../../features/perfumes/components/PerfumeCard';
+import type { RootState } from '../../../app/store';
+import PerfumeCard from '../../../features/perfumes/components/PerfumeCard';
 import { 
   Card,
   CardContent,

@@ -1,5 +1,5 @@
 import type { Comment } from '../api/types';
-import { Card, CardHeader, CardContent, Avatar, Typography, Divider, Box } from '@mui/material';
+import { Card, CardHeader, CardContent, Avatar, Typography, Divider, Rating } from '@mui/material';
 import { BASE_URL } from '../../../config/axiosInstance';
 
 interface CommentCardProps {
@@ -7,8 +7,6 @@ interface CommentCardProps {
 }
 
 function CommentCard({ comment }: CommentCardProps) {
-  const baseurl = BASE_URL;
-
   return (
     <Card 
       variant="outlined" 
@@ -22,7 +20,7 @@ function CommentCard({ comment }: CommentCardProps) {
       <CardHeader
         avatar={
           <Avatar
-            src={`${baseurl}${comment.user_id.profile_picture}`}
+            src={`${BASE_URL}${comment.user_id.profile_picture}`}
             alt={comment.user_id.nickname}
             sx={{ width: 48, height: 48 }}
           >
@@ -36,16 +34,28 @@ function CommentCard({ comment }: CommentCardProps) {
         }
         subheader={
           <Typography variant="caption" color="text.secondary">
-            {/* burada backend’den tarih varsa kullanabilirsin */}
-            {new Date(comment.created_at || Date.now()).toLocaleDateString("tr-TR")}
+            {new Date(comment.created_at).toLocaleDateString("tr-TR")}
           </Typography>
+        }
+        action={
+          <Rating
+            value={comment.rating}
+            precision={1}
+            readOnly
+            size='medium'
+          />
         }
       />
       <Divider />
       <CardContent sx={{ pt: 2, pb: 1 }}>
-        <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
-          {comment.content}
-        </Typography>
+        <Typography 
+          variant="body1" 
+          sx={{ lineHeight: 1.6, whiteSpace: "normal",  
+                        overflowWrap: "break-word", 
+                        wordBreak: "break-word"  }}
+          component="div"
+          dangerouslySetInnerHTML={{__html: comment.content}}
+          />
       </CardContent>
     </Card>
   );

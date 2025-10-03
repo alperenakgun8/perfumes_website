@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { FaSignInAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import type { AppDispatch, RootState } from "../../app/store";
-import type { UserLogin } from "../../features/users/api/types";
-import { fetchLoginUser, fetchUserFavorites } from "../../features/users/thunks/userThunks";
+import type { AppDispatch, RootState } from "../../../app/store";
+import type { UserLogin } from "../../../features/users/api/types";
+import { fetchLoginUser, fetchUserFavorites } from "../../../features/users/thunks/userThunks";
 
 function LoginPage() {
 
