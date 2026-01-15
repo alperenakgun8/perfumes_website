@@ -9,9 +9,9 @@ import UpdateConcentration from '../../features/concentrations/components/Update
 import DeleteConcentration from '../../features/concentrations/components/DeleteConcentration';
 
 import { 
-  Card,
   CardContent,
-  Grid
+  Grid,
+  Box
 } from '@mui/material';
 
 function ConcentrationManagementPage() {
@@ -23,7 +23,7 @@ function ConcentrationManagementPage() {
     }, [dispatch]);
 
   return (
-    <Card sx={{ maxWidth: '100%', margin: "1rem auto", padding: 2 }}>
+    <Box sx={{ maxWidth: '100%', margin: "1rem auto", padding: 2, backgroundColor: "transparent" }}>
       <CardContent>
         <Grid container spacing={2}>
           <Grid size={{xs:12}}>
@@ -40,7 +40,7 @@ function ConcentrationManagementPage() {
           </Grid>
         </Grid>
       </CardContent>
-    </Card>
+    </Box>
   );
 }
 

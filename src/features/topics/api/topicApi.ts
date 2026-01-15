@@ -17,6 +17,6 @@ export const addTopic = async(body: AddTopic): Promise<Topic> => {
 }
 
 export const deleteTopic = async(id: string): Promise<string> => {
-    const response = await axiosInstance.delete(`/topics/${id}`);
-    return response.data.data;
+    await axiosInstance.delete(`/topics/${id}`);
+    return id;
 }

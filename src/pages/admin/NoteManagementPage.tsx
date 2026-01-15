@@ -9,7 +9,7 @@ import DeleteNote from '../../features/notes/components/DeleteNote';
 import UpdateNote from '../../features/notes/components/UpdateNote';
 
 import { 
-  Card,
+  Box,
   CardContent,
   Grid
  } from '@mui/material';
@@ -23,7 +23,7 @@ function NoteManagementPage() {
   }, [dispatch]);
 
   return (
-      <Card sx={{ maxWidth: '100%', margin: "2rem auto", padding: 2 }}>
+      <Box sx={{ maxWidth: '100%', margin: "2rem auto", padding: 2, backgroundColor: "transparent" }}>
         <CardContent>
           <Grid container spacing={2}>
             <Grid size={{xs: 12}}>
@@ -40,7 +40,7 @@ function NoteManagementPage() {
             </Grid>
           </Grid>
         </CardContent>
-      </Card>
+      </Box>
   )
 }
 

@@ -59,6 +59,7 @@ export function usePerfumeForm () {
       }
  
       const handleAdd = () => {
+        console.log("gender: " + gender);
           const newPerfume: PerfumeAdd = {
             name,
             description,
@@ -91,7 +92,6 @@ export function usePerfumeForm () {
             dispatch(deleteExistingPerfume(selectedOption.value));
             setSelectedOption({label: "", value: ""});
         }
-
 
     return {
         perfumes,

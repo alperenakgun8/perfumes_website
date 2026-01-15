@@ -1,12 +1,12 @@
 import { usePerfumeForm } from "../hooks/usePerfumeForm";
 import PerfumeCard from "./PerfumeCard";
-import { Card, CardContent, Typography, Grid} from '@mui/material';
+import { Box, CardContent, Typography, Grid} from '@mui/material';
 function PerfumeList() {
 
     const { perfumes } = usePerfumeForm();
     
   return (
-    <Card sx={{ margin: '2rem auto', padding: 2, boxShadow: 3 }}>
+    <Box sx={{ margin: '2rem auto', padding: 2, backgroundColor: "transparent" }}>
         <CardContent>
             <Typography justifySelf="center" variant="h5" gutterBottom>
             Perfumes List
@@ -28,7 +28,7 @@ function PerfumeList() {
             )
         }
         </CardContent>
-    </Card>
+    </Box>
   )
 }
 

@@ -88,11 +88,11 @@ function RegisterPage() {
     }
 
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth="md" sx={{marginTop: "2rem"}}>
         <Paper elevation={10} sx={{marginTop: 1, padding: 1.3}}>
             <Avatar sx={{
                 mx: 'auto',
-                bgcolor: "secondary.main",
+                bgcolor: "#CB336B",
                 textAlign: "center",
                 mb: 1
             }}>
@@ -102,7 +102,9 @@ function RegisterPage() {
                 Kayıt Ol
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
-                <TextField 
+                <Grid container spacing={2}>
+                    <Grid size = {{ xs: 12, md: 6}}>
+                        <TextField 
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Ad:" 
@@ -112,7 +114,9 @@ function RegisterPage() {
                 error = {!!nameError}
                 helperText = {nameError}
                 />
-                <TextField 
+                    </Grid>
+                <Grid size={{xs: 12, md: 6}}>
+                    <TextField 
                 value={surname}
                 onChange={(e) => setSurname(e.target.value)}
                 placeholder="Soyad:" 
@@ -122,7 +126,9 @@ function RegisterPage() {
                 error = {!!surnameError}
                 helperText = {surnameError}
                 />
-                <TextField 
+                </Grid>
+                <Grid size={{xs: 12, md: 6}}>
+                    <TextField 
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
                 placeholder="Kullanıcı Adı:" 
@@ -132,7 +138,9 @@ function RegisterPage() {
                 error = {!!nicknameError}
                 helperText = {nicknameError}
                 />
-                <TextField 
+                </Grid>
+                <Grid size={{xs: 12, md: 6}}>
+                    <TextField 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
@@ -143,7 +151,9 @@ function RegisterPage() {
                 error = {!!emailError}
                 helperText = {emailError}
                 />
-                <TextField 
+                </Grid>
+                <Grid size={{xs: 12, md: 6}}>
+                    <TextField 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Şifre:" 
@@ -154,7 +164,9 @@ function RegisterPage() {
                 error = {!!passwordError}
                 helperText = {passwordError}
                 />
-                <TextField 
+                </Grid>
+                <Grid size={{xs: 12, md: 6}}>
+                    <TextField 
                 value={passwordValidation}
                 onChange={(e) => setPasswordValidation(e.target.value)}
                 placeholder="Şifre Tekrar:" 
@@ -165,12 +177,18 @@ function RegisterPage() {
                 error={!!passwordValidationError}
                 helperText={!!passwordValidationError}
                 />
-                <Button type="submit" variant="contained" fullWidth sx={{mt: 1}}>
+                </Grid>
+                </Grid>
+                <Grid container justifyContent="center">
+                    <Grid>
+                        <Button type="submit" variant="contained" fullWidth sx={{mt: 1, backgroundColor: "#CB336B"}}>
                     Kayıt Ol
                 </Button>
+                    </Grid>
+                </Grid>
                 <Grid container justifyContent="center" sx={{mt: 2}}>
                     <Grid>
-                        <Link component={RouterLink} to="/login">
+                        <Link component={RouterLink} underline="none" to="/login" sx={{color: "#CB336B"}}>
                             Zaten üye misin?
                         </Link>
                     </Grid>

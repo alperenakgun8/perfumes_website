@@ -83,8 +83,8 @@ function ProfileManagement() {
         <Avatar
           src={`${baseurl}${profilePic}` || ""}
           alt={user.first_name}
-          sx={{ width: 120, height: 120, mb: 2, cursor:"pointer" }}
-          onClick={handleAvatarClick}
+          sx={{ width: 120, height: 120, mb: 2, /*cursor:"pointer"*/ }}
+          /*onClick={handleAvatarClick}*/
         >
           {user.first_name?.[0]}
         </Avatar>
@@ -101,9 +101,9 @@ function ProfileManagement() {
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 2 }}>
           {
-            user.role === "User" ? "Kullanıcı" :
-            user.role === "Admin" ? "Admin" :
-            user.role === "Super Admin" ? "Süper Admin" :
+            user.role === "USER" ? "Kullanıcı" :
+            user.role === "ADMIN" ? "Admin" :
+            user.role === "SUPER_ADMIN" ? "Süper Admin" :
             "Rol Bulunamadı"
           }
         </Typography>

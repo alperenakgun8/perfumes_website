@@ -1,24 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { fetchUsers, deleteExistingUser, fetchLoginUser, updateExistingUserProfilePicture, updateExistingUser, fetchUserFavorites, addUserFavorite, deleteUserFavorite } from "../thunks/userThunks";
-import type { User, UserLoginElement } from "../api/types";
+import { fetchAuthUser, updateExistingUserProfilePicture, updateExistingUser, fetchUserFavorites, addUserFavorite, deleteUserFavorite, fetchAuthMe, fetchUsers} from "../thunks/userThunks";
+import type { User, UserAuthResponse } from "../api/types";
 import type { GeneralPerfumeInfo } from "../../perfumes/api/types";
 
 export interface UserState {
-    users: User[];
-    isAuthenticated: boolean,
-    isAdmin: boolean,
-    isSuperAdmin: boolean,
-    user: User
+    users: User[],
+    user: User,
     favorites: GeneralPerfumeInfo[]
 }
 
 const initialState: UserState = {
     users: [],
-    isAuthenticated: false,
-    isAdmin: false,
-    isSuperAdmin: false,
-    user: { email: "", first_name: "", last_name: "", role: "User", profile_picture: "", nickname: "" },
+    user: {_id: "", email: "", first_name: "", last_name: "", nickname: "", role: "USER" , profile_picture: "", language: "TR"},
     favorites: []
 }
 
@@ -27,10 +21,9 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            state.isAuthenticated = false;
-            state.isAdmin = false;
-            state.isSuperAdmin = false;
-            state.user = { email: "", first_name: "", last_name: "", role: "User", profile_picture:"", nickname: ""};
+            state.user = { _id: "", email: "", first_name: "", last_name: "", nickname: "", role: "USER" , profile_picture: "", language: "TR"};
+            state.favorites = [];
+            localStorage.removeItem("token");
         }
     },
     extraReducers: (builder) => {
@@ -38,12 +31,16 @@ export const userSlice = createSlice({
             state.users = action.payload;
         });
 
-        builder.addCase(fetchLoginUser.fulfilled, (state, action: PayloadAction<UserLoginElement>) => {
-            console.log(action.payload);
-            state.user = action.payload.user;
-            state.isAdmin = action.payload.is_admin;
-            state.isSuperAdmin = action.payload.is_super_admin;
-            state.isAuthenticated = action.payload.success;
+        builder.addCase(fetchAuthUser.fulfilled, (state, action: PayloadAction<UserAuthResponse>) => {
+           state.user = action.payload.user;
+        });
+
+        builder.addCase(fetchAuthUser.rejected, (state, action) => {
+            console.error("Login failed: ", action.error);
+        });
+
+        builder.addCase(fetchAuthMe.fulfilled, (state, action) => {
+            state.user = action.payload;
         });
 
         builder.addCase(updateExistingUserProfilePicture.fulfilled, (state, action: PayloadAction<string>) => {
@@ -54,14 +51,9 @@ export const userSlice = createSlice({
             state.user = action.payload;
         });
 
-        builder.addCase(fetchLoginUser.rejected, (state, action) => {
-            console.error("Login failed: ", action.error);
-            state.isAuthenticated = false;
-        });
-
-        builder.addCase(deleteExistingUser.fulfilled, (state, action: PayloadAction<string>) => {
-            state.users = state.users.filter(s => s._id !== action.payload);
-        });
+        // builder.addCase(deleteExistingUser.fulfilled, (state, action: PayloadAction<string>) => {
+        //     state.users = state.users.filter(s => s._id !== action.payload);
+        // });
 
         builder.addCase(fetchUserFavorites.fulfilled, (state, action: PayloadAction<GeneralPerfumeInfo[]>) => {
             state.favorites = action.payload;

@@ -1,27 +1,22 @@
 import { Container, Paper, Avatar, Typography, Box, TextField, FormControlLabel, Checkbox, Button, Grid, Link } from "@mui/material"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaSignInAlt } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import type { AppDispatch, RootState } from "../../../app/store";
-import type { UserLogin } from "../../../features/users/api/types";
-import { fetchLoginUser, fetchUserFavorites } from "../../../features/users/thunks/userThunks";
+import type { AppDispatch } from "../../../app/store";
+import type { UserAuth } from "../../../features/users/api/types";
+import { fetchAuthUser } from "../../../features/users/thunks/userThunks";
 
 function LoginPage() {
 
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
-    const isAuth = useSelector((state: RootState) => state.user.isAuthenticated);4
-
-    const userId = useSelector((state: RootState) => state.user.user._id);
-
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     const [emailError, setEmailError] = useState<string>("");
     const [passwordError, setPasswordError] = useState<string>("");
-
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -44,28 +39,21 @@ function LoginPage() {
 
         if (!valid) return;
 
-        const body: UserLogin  = {
+        const body: UserAuth  = {
             email: email,
             password: password
         }
-        dispatch(fetchLoginUser(body));
-    }
-
-    useEffect(() => {
-        if(isAuth) {
-            const body = {user_id: userId || ""};
-            dispatch(fetchUserFavorites(body));
-            console.log("çalışıyoru")
+        dispatch(fetchAuthUser(body)).unwrap().then(() => {
             navigate("/");
-        }
-    }, [isAuth, navigate]);
+        });
+    }
 
   return (
     <Container maxWidth="xs">
         <Paper elevation={10} sx={{marginTop: 8 , padding: 2 }}>
             <Avatar sx={{
                 mx: 'auto',
-                bgcolor: "secondary.main",
+                bgcolor: "#CB336B",
                 textAlign: "center",
                 mb: 1
             }}>
@@ -98,20 +86,20 @@ function LoginPage() {
                 error = {!!passwordError}
                 helperText={passwordError}
                 />
-                <FormControlLabel control={<Checkbox value="remember" color="primary"/>} 
+                {/* <FormControlLabel control={<Checkbox value="remember" color="primary"/>} 
                 label="Beni hatırla"
-                />
-                <Button type="submit" variant="contained" fullWidth sx={{mt: 1}}>
+                /> */}
+                <Button type="submit" variant="contained" fullWidth sx={{mt: 1, backgroundColor: "#CB336B"}}>
                     Giriş Yap 
                 </Button>
                 <Grid container justifyContent="space-between" sx={{mt: 2}}>
                     <Grid>
-                        <Link component={RouterLink} to="/forgot">
+                        <Link component={RouterLink} underline="none" to="/forgot" sx={{color: "#CB336B"}}>
                         Şifremi Unuttum
                         </Link>
                     </Grid>
                     <Grid>
-                        <Link component={RouterLink} to="/register">
+                        <Link component={RouterLink} underline="none" to="/register" sx={{color: "#CB336B"}}>
                         Kayıt Ol
                         </Link>
                     </Grid>

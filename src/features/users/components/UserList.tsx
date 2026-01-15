@@ -1,8 +1,4 @@
-import React, {useEffect} from 'react';
-import type { AppDispatch, RootState } from '../../../app/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from '../thunks/userThunks';
-
+import React from 'react';
 import { 
     Card,
     CardContent,

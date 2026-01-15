@@ -18,7 +18,7 @@ function ForumPage() {
 
   useEffect(() => {
     dispatch(fetchTopics());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Grid container spacing={2} sx={{margin: "auto 2rem"}}>
@@ -48,7 +48,7 @@ function ForumPage() {
       </Grid>
       {
         filteredTopics.length !== 0 &&   filteredTopics.map(t => (
-          <Grid size= {{xs: 12, md: 6, lg: 4}}>
+          <Grid size= {{xs: 12}}>
               <TopicCard key={t._id} topic={t}/>
           </Grid>
         )) 

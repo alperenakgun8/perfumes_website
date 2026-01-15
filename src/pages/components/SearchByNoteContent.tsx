@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNoteForm } from "../../features/notes/hooks/useNoteForm";
 import { 
-    Card,
     CardContent,
     Grid,
     Autocomplete,
@@ -17,22 +16,22 @@ import PerfumeCard from "../../features/perfumes/components/PerfumeCard";
 
 function SearchByNoteContent() {
 
-    let selectedPerfumes = useSelector((state: RootState) => state.perfume.selectedPerfumes || []);
+    const selectedPerfumes = useSelector((state: RootState) => state.perfume.selectedPerfumes || []);
     const { selectedOptions, setSelectedOptions, dropDownOptions, handleSearch } = useNoteForm();
 
   return (
    <>
-    <Box marginTop="2rem" display="flex" alignItems="center" justifyContent="center">
-        <Card sx={{width: {sm: "600px"}}}>
+    <Box marginTop="2rem" display="flex" alignItems="center" justifyContent="center" sx={{backgroundColor: "transparent"}}>
+        <Box sx={{padding: "1rem", width: {sm: "600px"}, minWidth: "300px", backgroundColor: "transparent"}}>
         <Grid container spacing={1}>
-          <Grid size={{xs:12}}>
+          <Grid size={{xs:12}} sx={{backgroundColor: "#C6E3AC"}}>
             <Autocomplete
                 multiple
                 fullWidth
                 options={dropDownOptions}
                 getOptionLabel={(option) => option.label}
                 value={dropDownOptions.filter(opt => selectedOptions.map(s => s.value).includes(opt.value))}
-                onChange={(event, newValue) => {
+                onChange={(_, newValue) => {
                     const uniqueValuesMap = new Map(newValue.map(item => [item.value, item]));
                     setSelectedOptions(Array.from(uniqueValuesMap.values()));
                 }}
@@ -48,7 +47,7 @@ function SearchByNoteContent() {
                     )
                 }}
                 renderInput={(params) => <TextField {...params} 
-                label="Aramak istediğiniz notaları seçin..." 
+                label="Nota filtresi..." 
                 placeholder="Seçiniz..." 
                 onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -73,10 +72,10 @@ function SearchByNoteContent() {
             />
           </Grid>
         </Grid>
-    </Card>
+    </Box>
     </Box>
     
-    <Card sx={{maxWidth: "100%", marginTop:"1rem"}}>
+    <Box sx={{maxWidth: "100%", marginTop:"1rem", backgroundColor: "transparent", border: "none"}}>
       
       <CardContent>
         {
@@ -93,7 +92,7 @@ function SearchByNoteContent() {
             )
         }
       </CardContent>
-    </Card>
+    </Box>
    </>
   )
 }

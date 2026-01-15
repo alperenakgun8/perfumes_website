@@ -54,14 +54,13 @@ function PasswordManagementPage() {
             old_password: oldPassword
         }
 
-        console.log(body);
-
         const response = await updatePassword(body);
+        console.log(response);
 
         if(response.success) {
             navigate("/profile/profile");
         } else {
-            if(response.message === "does not matched old_password") {
+            if(response.message === "Does not matched old_password") {
                 setOldPasswordError("Şifre yanlış");
                 valid = false;
             } else {

@@ -10,7 +10,8 @@ import {
     TextField,
     Checkbox,
     Chip,
-    Button
+    Button,
+    Box
  } from "@mui/material";
 import type { Concentration } from '../../features/concentrations/api/types';
 import { fetchPerfumesByFilter } from '../../features/perfumes/thunks/perfumeThunks';
@@ -35,7 +36,7 @@ function SearchPerfumeContent() {
 
     const handleFilter = () => {
 
-        let concentrations: string[] = [];
+        const concentrations: string[] = [];
 
          selectedConcentrations.map(c => {
             if(c._id) concentrations.push(c._id);
@@ -51,10 +52,10 @@ function SearchPerfumeContent() {
 
   return (
      <>
-        <Card sx={{minWidth:"90vw", margin: "2rem auto", padding: 2, boxShadow: 3}}>
+        <Box sx={{minWidth:"90vw", marginTop: "1rem", padding: 2, backgroundColor: "transparent"}}>
             <CardContent>
                 <Grid container spacing={2}>
-                    <Grid size={{xs: 12, md: 4, lg: 4}}>
+                    <Grid size={{xs: 12, md: 4, lg: 4}} sx={{backgroundColor: "#C6E3AC"}}>
                         <TextField
                             fullWidth
                             label="Parfüm Ara"
@@ -63,7 +64,7 @@ function SearchPerfumeContent() {
                             onChange={(e) => setSeatchText(e.target.value)}
                         />
                     </Grid>
-                    <Grid size={{xs: 12, md: 4, lg: 3 }}>
+                    <Grid size={{xs: 12, md: 4, lg: 3 }} sx={{backgroundColor: "#C6E3AC"}}>
                         <Autocomplete
                             multiple
                             options={brands}
@@ -88,7 +89,7 @@ function SearchPerfumeContent() {
                             ))}
                         />
                     </Grid>
-                    <Grid size={{xs: 12, md: 4, lg: 2 }}>
+                    <Grid size={{xs: 12, md: 4, lg: 2 }} sx={{backgroundColor: "#C6E3AC"}}>
                         <Autocomplete
                             multiple
                             options={concentrations}
@@ -116,7 +117,7 @@ function SearchPerfumeContent() {
                             ))}
                         />
                     </Grid>
-                    <Grid size={{xs: 12, md: 4, lg: 2 }}>
+                    <Grid size={{xs: 12, md: 4, lg: 2 }} sx={{backgroundColor: "#C6E3AC"}}>
                         <Autocomplete
                             multiple
                             options={genders}
@@ -142,15 +143,15 @@ function SearchPerfumeContent() {
                         />
                     </Grid>
                     <Grid size={{xs: 12, md: 12, lg: 1}} sx={{ display: "flex", alignItems: "center" }}>
-                        <Button onClick={handleFilter} variant="contained" color='error'>
+                        <Button onClick={handleFilter} variant="contained" sx={{backgroundColor: "#CB336B"}}>
                             Filtrele
                         </Button>
                     </Grid>
                 </Grid>
             </CardContent>
-        </Card>
+        </Box>
 
-      <Card sx={{maxWidth: "100%", marginTop:"1rem"}}>
+      <Box sx={{maxWidth: "100%", backgroundColor: "transparent"}}>
         <CardContent>
           {
 
@@ -179,7 +180,7 @@ function SearchPerfumeContent() {
             //   )
           }
         </CardContent>
-      </Card>
+      </Box>
      </>
     )
 }

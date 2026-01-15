@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getUsers, deleteUser, userLogin, updateProfilePicture, updateUser, getUserFavorites, addFavorite, deleteFavorite } from "../api/userApi";
-import type { UserLogin, UserUpdate } from "../api/types";
-import { data } from "react-router-dom";
+import { getUsers, deleteUser, userAuth, updateProfilePicture, updateUser, getUserFavorites, addFavorite, deleteFavorite, userAuthMe } from "../api/userApi";
+import type { UserAuth, UserUpdate } from "../api/types";
 
 export const fetchUsers = createAsyncThunk(
     "user/fetchAll",
@@ -11,11 +10,26 @@ export const fetchUsers = createAsyncThunk(
     }
 );
 
-export const fetchLoginUser = createAsyncThunk(
-    "user/fetchLogin",
-    async (body: UserLogin) => {
-        const data = await userLogin(body);
-        console.log(data);
+export const fetchAuthMe = createAsyncThunk(
+    "user/fetchAuthMe",
+    async (_ , { dispatch }) => {
+        const data = await userAuthMe();
+
+        if(data && data._id) dispatch(fetchUserFavorites());
+
+        return data;
+    }
+);
+
+export const fetchAuthUser = createAsyncThunk(
+    "user/fetchAuth",
+    async (body: UserAuth, { dispatch }) => {
+        const data = await userAuth(body);
+
+        if(data.token) localStorage.setItem("token", data.token);
+
+        if(data.user && data.user._id) dispatch(fetchUserFavorites());
+
         return data;
     }
 );
@@ -46,15 +60,15 @@ export const deleteExistingUser = createAsyncThunk(
 
 export const fetchUserFavorites = createAsyncThunk(
     "user/getfavorite",
-    async(body: {user_id: string}) => {
-        const data = await getUserFavorites(body);
+    async() => {
+        const data = await getUserFavorites();
         return data;
     }  
 );
 
 export const addUserFavorite = createAsyncThunk(
     "user/addfavorite",
-    async(body: {user_id: string, perfume_id: string}) => {
+    async(body: {perfume_id: string}) => {
         const data = await addFavorite(body);
         return data;
     }
@@ -62,7 +76,7 @@ export const addUserFavorite = createAsyncThunk(
 
 export const deleteUserFavorite = createAsyncThunk(
     "user/deletefavorite",
-    async(body: {user_id: string, perfume_id: string}) => {
+    async(body: { perfume_id: string}) => {
         const data = await deleteFavorite(body);
         return data;
     }

@@ -31,5 +31,6 @@ export const topicSlice = createSlice({
     }
 });
 
-export const {   } = topicSlice.actions
+// export const {   } = topicSlice.actions
+
 export default topicSlice.reducer

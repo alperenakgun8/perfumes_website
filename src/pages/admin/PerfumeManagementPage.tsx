@@ -12,7 +12,7 @@ import DeletePerfume from "../../features/perfumes/components/DeletePerfume";
 import UpdatePerfume from "../../features/perfumes/components/UpdatePerfume";
 
 import { 
-  Card,
+  Box,
   CardContent,
   Grid
  } from "@mui/material";
@@ -28,7 +28,7 @@ function PerfumeManagementPage() {
   }, [dispatch]);
 
   return (
-    <Card sx={{ maxWidth: '100%', margin: "2rem auto", padding: 2 }}>
+    <Box sx={{ maxWidth: '100%', margin: "2rem auto", padding: 2, backgroundColor: "transparent" }}>
       <CardContent>
         <Grid container spacing={2}>
           <Grid size={{xs: 12}}>
@@ -45,7 +45,7 @@ function PerfumeManagementPage() {
           </Grid>
         </Grid>
       </CardContent>
-    </Card>
+    </Box>
   )
 }
 

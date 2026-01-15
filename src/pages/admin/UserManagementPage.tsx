@@ -2,7 +2,7 @@ import UserList from "../../features/users/components/UserList";
 import DeleteUser from "../../features/users/components/DeleteUser";
 
 import { 
-    Card,
+    Box,
     CardContent,
     Grid
  } from "@mui/material";
@@ -21,7 +21,7 @@ function UserManagementPage () {
     },[dispatch]);
 
 return(
-    <Card sx={{ maxWidth: '100%', margin: "2rem auto", padding: 2 }}>
+    <Box sx={{ maxWidth: '100%', margin: "2rem auto", padding: 2, backgroundColor: "transparent" }}>
         <CardContent>
             <Grid container spacing={2}>
                 <Grid size = {{xs: 12}}>
@@ -36,7 +36,7 @@ return(
                 }
             </Grid>
         </CardContent>
-    </Card>
+    </Box>
 )
 }
 

@@ -4,13 +4,19 @@ export interface User {
     first_name: string,
     last_name: string,
     nickname: string,
-    role: "User" | "Admin" | "Super Admin",
-    profile_picture: string
+    profile_picture: string,
+    language: string,
+    role: "USER" | "ADMIN" | "SUPER_ADMIN",
 }
 
-export interface UserLogin {
+export interface UserAuth {
     email: string,
     password: string
+}
+
+export interface UserAuthResponse {
+    token: string,
+    user: User,
 }
 
 export interface UserRegister {
@@ -19,13 +25,6 @@ export interface UserRegister {
     first_name: string,
     last_name: string,
     nickname: string
-}
-
-export interface UserLoginElement {
-    user: User,
-    is_admin: boolean,
-    is_super_admin: boolean,
-    success: boolean
 }
 
 export interface UserUpdatePassword {

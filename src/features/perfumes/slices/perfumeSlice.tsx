@@ -57,6 +57,6 @@ export const perfumeSlice = createSlice({
     }
 });
 
-export const {   } = perfumeSlice.actions
+// export const {   } = perfumeSlice.actions
 
 export default perfumeSlice.reducer

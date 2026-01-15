@@ -1,9 +1,8 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../../../app/store';
 import PerfumeCard from '../../../features/perfumes/components/PerfumeCard';
 import { 
-  Card,
+  Box,
   CardContent,
   Grid,
   Typography
@@ -14,7 +13,7 @@ function FavoritesPage() {
   const favorites = useSelector((state: RootState) => state.user.favorites);
 
   return (
-    <Card sx={{margin: "2rem auto", padding: 2, boxShadow: 3}}>
+    <Box sx={{margin: "2rem auto", padding: 2, backgroundColor: "transparent"}}>
       <CardContent>
         <Typography justifySelf="center" variant='h5' gutterBottom>
           Favorilerim
@@ -43,7 +42,7 @@ function FavoritesPage() {
           )
         }
       </CardContent>
-    </Card>
+    </Box>
   )
 }
 

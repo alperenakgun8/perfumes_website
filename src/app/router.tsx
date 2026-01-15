@@ -24,9 +24,9 @@ function Router() {
             <Route path="/perfumedetail/:id" element={<PerfumeDetailsPage />} />
             <Route path="/perfumes" element={<SearchPerfumePage />} />
 
-            <Route path="/forum" element={<ForumPage/>}/>
+            {/* <Route path="/forum" element={<ForumPage/>}/>
             <Route path="/createtopic" element={<CreateTopicPage/>}/>
-            <Route path="/topicdetail/:id" element={<TopicDetailsPage/>}/>
+            <Route path="/topicdetail/:id" element={<TopicDetailsPage/>}/> */}
 
             <Route path="/profile" element={<ProfilePage />}>
                 <Route path="profile" element={<ProfileManagement/>}/>

@@ -22,7 +22,7 @@ function PerfumeDetailsPage() {
   const { id } = useParams<{ id: string }>();
 
   const userId = useSelector((state: RootState) => state.user.user._id);
-  const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   const [perfumeDetail, setPerfumeDetail] = useState<PerfumeDetail | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -38,6 +38,7 @@ function PerfumeDetailsPage() {
 
   useEffect(() => {
     if(id) dispatch(fetchPerfumeComments(id));
+    if(userId) setIsAuthenticated(true);
   }, [id]);
 
   useEffect(() => {
@@ -101,7 +102,6 @@ function PerfumeDetailsPage() {
       const body: AddComment = {
         content: comment,
         perfume_id: id || "",
-        user_id: userId || "",
         rating: rating
       }
       dispatch(addCommentToPerfumeAndUser(body));
@@ -196,7 +196,7 @@ function PerfumeDetailsPage() {
               <Rating
                 name='parfume_rating'
                 value={rating}
-                onChange={(event, newValue) => setRating(newValue)}
+                onChange={(event, newValue: number) => setRating(newValue)}
                 precision={1}
               />
             </Grid>

@@ -12,7 +12,6 @@ export interface Comment {
 }
 
 export interface AddComment {
-    user_id: string,
     perfume_id: string,
     content: string,
     rating: number
