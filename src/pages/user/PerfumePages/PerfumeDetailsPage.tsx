@@ -196,7 +196,7 @@ function PerfumeDetailsPage() {
               <Rating
                 name='parfume_rating'
                 value={rating}
-                onChange={(_, newValue: number) => setRating(newValue)}
+                onChange={(_, newValue) => setRating(newValue)}
                 precision={1}
               />
             </Grid>
