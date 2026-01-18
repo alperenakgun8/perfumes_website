@@ -33,7 +33,7 @@ function UpdatePerfume() {
                 options={perfumeDropDownOptions}
                 getOptionLabel={(option) => option.label}
                 value={selectedOption}
-                onChange={(event, newValue) => setSelectedOption(newValue ?? {label:"", value:""})}
+                onChange={(_, newValue) => setSelectedOption(newValue ?? {label:"", value:""})}
                 renderInput={(params) => <TextField {...params} label="Select Parfume" placeholder='Search'/>}
                 disableClearable={false}
             />
@@ -98,7 +98,7 @@ function UpdatePerfume() {
               value={getAvailableNotes("TOP").filter(opt =>
                 notes.filter(n => n.note_type === "TOP").map(n => n.note_id).includes(opt.value)
               )}
-              onChange={(e, newValue:{value: string, label: string}[]) => handleNotesChange("TOP", newValue.map(v => v.value))}
+              onChange={(_, newValue:{value: string, label: string}[]) => handleNotesChange("TOP", newValue.map(v => v.value))}
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => {
                 const { key, ...otherProps } = props;
@@ -126,7 +126,7 @@ function UpdatePerfume() {
               value={getAvailableNotes("MIDDLE").filter(opt =>
                 notes.filter(n => n.note_type === "MIDDLE").map(n => n.note_id).includes(opt.value)
               )}
-              onChange={(e, newValue: {value: string, label: string}[]) => handleNotesChange("MIDDLE", newValue.map(v => v.value))}
+              onChange={(_, newValue: {value: string, label: string}[]) => handleNotesChange("MIDDLE", newValue.map(v => v.value))}
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => {
                 const { key, ...otherProps } = props;
@@ -154,7 +154,7 @@ function UpdatePerfume() {
               value={getAvailableNotes("BASE").filter(opt =>
                 notes.filter(n => n.note_type === "BASE").map(n => n.note_id).includes(opt.value)
               )}
-              onChange={(e, newValue: {value: string, label: string}[]) => handleNotesChange("BASE", newValue.map(v => v.value))}
+              onChange={(_, newValue: {value: string, label: string}[]) => handleNotesChange("BASE", newValue.map(v => v.value))}
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => {
                 const { key, ...otherProps} = props;

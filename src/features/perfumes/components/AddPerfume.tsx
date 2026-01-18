@@ -89,7 +89,7 @@ function AddPerfume() {
               value={getAvailableNotes("TOP").filter(opt =>
                 notes.filter(n => n.note_type === "TOP").map(n => n.note_id).includes(opt.value)
               )}
-              onChange={(e, newValue) => handleNotesChange("TOP", newValue.map(v => v.value))}
+              onChange={(_, newValue) => handleNotesChange("TOP", newValue.map(v => v.value))}
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => {
                 const { key, ...otherProps} = props;
@@ -115,7 +115,7 @@ function AddPerfume() {
               value={getAvailableNotes("MIDDLE").filter(opt =>
                 notes.filter(n => n.note_type === "MIDDLE").map(n => n.note_id).includes(opt.value)
               )}
-              onChange={(e, newValue) => handleNotesChange("MIDDLE", newValue.map(v => v.value))}
+              onChange={(_, newValue) => handleNotesChange("MIDDLE", newValue.map(v => v.value))}
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => {
                 const { key, ...otherProps} = props;
@@ -141,7 +141,7 @@ function AddPerfume() {
               value={getAvailableNotes("BASE").filter(opt =>
                 notes.filter(n => n.note_type === "BASE").map(n => n.note_id).includes(opt.value)
               )}
-              onChange={(e, newValue) => handleNotesChange("BASE", newValue.map(v => v.value))}
+              onChange={(_, newValue) => handleNotesChange("BASE", newValue.map(v => v.value))}
               disableCloseOnSelect
               renderOption={(props, option, { selected }) => {
                 const { key, ...otherProps} = props;

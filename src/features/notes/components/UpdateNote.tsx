@@ -26,7 +26,7 @@ function UpdateNote() {
               options={dropDownOptions}
               getOptionLabel={(option) => option.label}
               value={selectedOption}
-              onChange={(event, newValue) => setSelectedOption(newValue ?? {label: "", value: ""})}
+              onChange={(_, newValue) => setSelectedOption(newValue ?? {label: "", value: ""})}
               renderInput={(params) => <TextField {...params} label="Select Note" placeholder="Search..." />}
               disableClearable={false} // true yaparsan seçimi kaldırmayı engeller
             />

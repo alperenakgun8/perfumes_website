@@ -13,9 +13,9 @@ import ProfilePage from "../pages/user/ProfilePages/ProfilePage";
 import ProfileManagement from "../pages/user/ProfilePages/ProfileManagement";
 import FavoritesPage from "../pages/user/ProfilePages/FavoritesPage";
 import PasswordManagementPage from "../pages/user/ProfilePages/PasswordManagementPage";
-import ForumPage from "../pages/user/ForumPages/ForumPage";
-import TopicDetailsPage from "../pages/user/ForumPages/TopicDetailsPage";
-import CreateTopicPage from "../pages/user/ForumPages/CreateTopicPage";
+// import ForumPage from "../pages/user/ForumPages/ForumPage";
+// import TopicDetailsPage from "../pages/user/ForumPages/TopicDetailsPage";
+// import CreateTopicPage from "../pages/user/ForumPages/CreateTopicPage";
 
 function Router() {
     return(

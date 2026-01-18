@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect } from "react";
 import { Box, List, ListItemButton, ListItemText, Drawer, Toolbar, Divider, Typography } from "@mui/material";
 import { Link, useLocation, Outlet } from "react-router-dom";

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../app/store';
 import PerfumeCard from '../../features/perfumes/components/PerfumeCard';
 import { 
-    Card,
     CardContent,
     Grid,
     Autocomplete,
@@ -70,7 +69,7 @@ function SearchPerfumeContent() {
                             options={brands}
                             getOptionLabel={(option) => option}
                             value={selectedBrands}
-                            onChange={(event, newValue) => setSelectedBrands(newValue)}
+                            onChange={(_, newValue) => setSelectedBrands(newValue)}
                             disableCloseOnSelect
                             renderOption={(props, option, {selected}) => {
                                 const {key, ...otherProps} = props;
@@ -95,7 +94,7 @@ function SearchPerfumeContent() {
                             options={concentrations}
                             getOptionLabel={(option) => option.name}
                             value={selectedConcentrations}
-                            onChange={(event, newValue) => setSelectedConcentrations(newValue)}
+                            onChange={(_, newValue) => setSelectedConcentrations(newValue)}
                             disableCloseOnSelect
                             renderOption={(props, option, {selected}) => {
                                 const {key, ...otherProps} = props;
@@ -123,7 +122,7 @@ function SearchPerfumeContent() {
                             options={genders}
                             getOptionLabel={(option) => option}
                             value={selectedGenders}
-                            onChange={(event, newValue) => setSelectedGenders(newValue)}
+                            onChange={(_, newValue) => setSelectedGenders(newValue)}
                             disableCloseOnSelect
                             renderOption={(props, option, {selected}) => {
                                 const {key, ...otherProps} = props;

@@ -26,7 +26,7 @@ function DeleteNote() {
               options={dropDownOptions}
               getOptionLabel={(option) => option.label}
               value={selectedOption}
-              onChange={(event, newValue) => setSelectedOption(newValue ?? {label: "", value: ""})}
+              onChange={(_, newValue) => setSelectedOption(newValue ?? {label: "", value: ""})}
               renderInput={(params) => <TextField {...params} label="Selected Note" placeholder='Search'/>}
               disableClearable={false}
             />

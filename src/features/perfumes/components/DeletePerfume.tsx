@@ -26,7 +26,7 @@ function DeletePerfume() {
               options={perfumeDropDownOptions}
               getOptionLabel={(option) => option.label}
               value={selectedOption}
-              onChange={(event, newValue) => setSelectedOption(newValue ?? {label: "", value: ""})}
+              onChange={(_, newValue) => setSelectedOption(newValue ?? {label: "", value: ""})}
               renderInput={(params) => <TextField {...params} label="Selected Perfume" placeholder='Search'/>}
               disableClearable={false}
             />

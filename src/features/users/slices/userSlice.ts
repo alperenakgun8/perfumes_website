@@ -35,7 +35,7 @@ export const userSlice = createSlice({
            state.user = action.payload.user;
         });
 
-        builder.addCase(fetchAuthUser.rejected, (state, action) => {
+        builder.addCase(fetchAuthUser.rejected, (_state, action) => {
             console.error("Login failed: ", action.error);
         });
 

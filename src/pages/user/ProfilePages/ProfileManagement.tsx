@@ -54,9 +54,9 @@ function ProfileManagement() {
     setIsEditable(false);
   }
 
-  const handleAvatarClick = () => {
-    fileInputRef.current?.click();
-  }
+  // const handleAvatarClick = () => {
+  //   fileInputRef.current?.click();
+  // }
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];

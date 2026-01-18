@@ -14,7 +14,8 @@ import { fetchUsers } from "../../features/users/thunks/userThunks";
 function UserManagementPage () {
 
     const dispatch = useDispatch<AppDispatch>();
-    const isSuperAdmin = useSelector((state: RootState) => state.user.isSuperAdmin);
+    const superAdmin = useSelector((state: RootState) => state.user.user.role);
+    const isSuperAdmin = superAdmin === "SUPER_ADMIN";
 
     useEffect(() => {
         dispatch(fetchUsers());
