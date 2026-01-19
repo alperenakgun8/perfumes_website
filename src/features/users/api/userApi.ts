@@ -8,7 +8,7 @@ export const getUsers = async () : Promise<User[]> => {
 }
 
 export const addUser = async (body: UserRegister): Promise<boolean> => {
-    const response = await axiosInstance.post("/users/register", body);
+    const response = await axiosInstance.post("/users/add", body);
     return response.data.data.success
 }
 
