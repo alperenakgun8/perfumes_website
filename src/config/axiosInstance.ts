@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = import.meta.env.VITE_API_URL;
+export const BASE_URL = "https://perfumes-backend-blro.onrender.com";
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
