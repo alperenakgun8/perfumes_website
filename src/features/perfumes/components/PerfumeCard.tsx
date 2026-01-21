@@ -47,7 +47,7 @@ function PerfumeCard({_id, brand, name, image_url}: PerfumeCardProps) {
   }
 
   return (
-    <Card sx={{ margin: 1, boxShadow: 3, textAlign: "center", cursor: "pointer", position: "relative", backgroundColor: "#C6E3AC", width: 160, height: 250}}>
+    <Card sx={{ margin: 1, boxShadow: 3, textAlign: "center", cursor: "pointer", position: "relative", backgroundColor: "#C6E3AC", width: 155, height: 250}}>
       <Box
         sx={{
           position: 'absolute',
