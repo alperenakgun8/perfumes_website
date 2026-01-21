@@ -47,7 +47,7 @@ function PerfumeCard({_id, brand, name, image_url}: PerfumeCardProps) {
   }
 
   return (
-    <Card sx={{ margin: 1, boxShadow: 3, textAlign: "center", cursor: "pointer", position: "relative", backgroundColor: "#C6E3AC" }}>
+    <Card sx={{ margin: 1, boxShadow: 3, textAlign: "center", cursor: "pointer", position: "relative", backgroundColor: "#C6E3AC", width: 180, height: 250}}>
       <Box
         sx={{
           position: 'absolute',
@@ -78,7 +78,10 @@ function PerfumeCard({_id, brand, name, image_url}: PerfumeCardProps) {
     </Box>
     <CardContent sx={{ padding: "0.25rem 0" }}>
       <Typography variant="body2" component="div" margin="0.5rem">
-        {brand} - {name}
+        {brand}
+      </Typography>
+      <Typography variant="body2" component="div" margin="0.5rem">
+        {name}
       </Typography>
     </CardContent>
   </CardActionArea>
